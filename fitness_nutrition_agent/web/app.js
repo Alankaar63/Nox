@@ -1,7 +1,6 @@
 const { useEffect, useMemo, useState } = React;
 const API_BASE_URL = "https://nox-web.onrender.com";
-const ANDROID_APP_URL = "downloads/NOX-android-latest.apk";
-const ANDROID_APP_AVAILABLE = true;
+const ANDROID_APP_URL = "https://nox-web.onrender.com/downloads/NOX-android-latest.apk";
 
 async function api(path, options = {}) {
   const normalizedBase = API_BASE_URL.trim().replace(/\/+$/, "");
@@ -408,20 +407,14 @@ function App() {
 
           <article className="card full" id="android-section">
             <h3>NOX Android App</h3>
-            <p className="notice">
-              {ANDROID_APP_AVAILABLE
-                ? "Android app is live. Download below."
-                : "Android app is ready in project. Publish APK to web/downloads to enable this link."}
-            </p>
+            <p className="notice">Download the app from here.</p>
             <a
               className="download-link"
-              href={ANDROID_APP_AVAILABLE ? ANDROID_APP_URL : "#"}
-              aria-disabled={ANDROID_APP_AVAILABLE ? "false" : "true"}
-              onClick={(e) => {
-                if (!ANDROID_APP_AVAILABLE) e.preventDefault();
-              }}
+              href={ANDROID_APP_URL}
+              download
+              rel="noopener"
             >
-              {ANDROID_APP_AVAILABLE ? "Download NOX Android" : "Download NOX Android (Publishing Soon)"}
+              Download the app from here
             </a>
           </article>
         </section>
