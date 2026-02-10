@@ -1,7 +1,7 @@
 const { useEffect, useMemo, useState } = React;
 const API_BASE_URL = ""; // e.g. "https://nox-web.onrender.com" for GitHub Pages frontend
 const ANDROID_APP_URL = "downloads/NOX-android-latest.apk";
-const ANDROID_APP_AVAILABLE = false;
+const ANDROID_APP_AVAILABLE = true;
 
 async function api(path, options = {}) {
   const normalizedBase = API_BASE_URL.trim().replace(/\/+$/, "");
