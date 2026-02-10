@@ -1,7 +1,18 @@
+import java.util.Properties
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
 }
+
+val keystoreProps = Properties()
+val keystorePropsFile = rootProject.file("keystore.properties")
+if (keystorePropsFile.exists()) {
+    keystorePropsFile.inputStream().use { keystoreProps.load(it) }
+}
+
+val enableReleaseSigning =
+    ((project.findProperty("NOX_ENABLE_RELEASE_SIGNING") as? String)?.toBooleanStrictOrNull() ?: false)
 
 android {
     namespace = "com.nox.app"
@@ -19,6 +30,27 @@ android {
         buildConfigField("String", "NOX_BASE_URL", "\"$baseUrl\"")
     }
 
+    signingConfigs {
+        if (enableReleaseSigning && keystorePropsFile.exists()) {
+            val storeFilePath = keystoreProps.getProperty("storeFile", "")
+            val ksStorePassword = keystoreProps.getProperty("storePassword", "")
+            val ksKeyAlias = keystoreProps.getProperty("keyAlias", "")
+            val ksKeyPassword = keystoreProps.getProperty("keyPassword", "")
+            val storeFileObj = file(storeFilePath)
+
+            if (storeFilePath.isNotBlank() && storeFileObj.exists() && ksStorePassword.isNotBlank() && ksKeyAlias.isNotBlank()) {
+                create("release") {
+                    storeFile = storeFileObj
+                    storePassword = ksStorePassword
+                    keyAlias = ksKeyAlias
+                    keyPassword = ksKeyPassword
+                    enableV1Signing = true
+                    enableV2Signing = true
+                }
+            }
+        }
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -26,6 +58,11 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            // Default to debug signing for frictionless builds; turn on release signing explicitly.
+            signingConfig = signingConfigs.findByName("release") ?: signingConfigs.getByName("debug")
+        }
+        debug {
+            signingConfig = signingConfigs.getByName("debug")
         }
     }
 

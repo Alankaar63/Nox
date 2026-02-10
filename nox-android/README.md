@@ -26,13 +26,39 @@ Examples:
 
 ## Build Release APK
 In Android Studio:
-1. `Build` -> `Generate Signed Bundle / APK`
-2. Choose `APK` and complete signing flow.
+1. Copy signing template:
+   - `cp keystore.properties.example keystore.properties`
+2. Edit `keystore.properties` with your real values.
+3. In `/Users/vivektripathi/Trial-Ai agent/nox-android/gradle.properties` set:
+   - `NOX_ENABLE_RELEASE_SIGNING=true`
+3. Build in Android Studio:
+   - `Build` -> `Generate Signed Bundle / APK`
+   - Choose `APK` and select your keystore.
 
 Or command line (after generating wrapper):
 ```bash
 ./gradlew assembleRelease
 ```
+
+## Quick APK (No Signing Friction)
+
+For immediate testing/deploy preview, generate debug APK:
+
+```bash
+cd "/Users/vivektripathi/Trial-Ai agent/nox-android"
+./gradlew assembleDebug
+```
+
+Then publish to website link:
+
+```bash
+cd "/Users/vivektripathi/Trial-Ai agent"
+./scripts/publish_android_apk.sh
+```
+
+If you see `validateSigningRelease` keystore path errors:
+- Ensure `nox-android/keystore.properties` exists.
+- Ensure `storeFile` points to an absolute path that exists (example `/Users/vivektripathi/keystores/nox-release.jks`).
 
 ## Visual Branding Files
 - Icon: `/Users/vivektripathi/Trial-Ai agent/nox-android/app/src/main/res/drawable/ic_nox_logo.xml`
