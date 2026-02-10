@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" role="img" aria-label="Athlete image placeholder">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1a1a22"/>
+      <stop offset="100%" stop-color="#361826"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#bg)"/>
+  <g fill="none" stroke="#fc455f" stroke-opacity="0.45">
+    <circle cx="250" cy="200" r="140"/>
+    <circle cx="950" cy="560" r="180"/>
+  </g>
+  <text x="50%" y="46%" fill="#f4f4f7" font-family="Arial, sans-serif" font-size="48" text-anchor="middle">Athlete Image Missing</text>
+  <text x="50%" y="54%" fill="#a5a7b4" font-family="Arial, sans-serif" font-size="28" text-anchor="middle">Add local image in web/assets/athletes</text>
+</svg>

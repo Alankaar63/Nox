@@ -1,0 +1,104 @@
+[
+  {
+    "name": "High-Protein Chicken Bowl",
+    "goal_tags": ["muscle_gain", "maintenance"],
+    "meal_type": "lunch",
+    "calories": 620,
+    "protein_g": 52,
+    "carbs_g": 58,
+    "fat_g": 18,
+    "ingredients": [
+      "180g chicken breast",
+      "180g cooked brown rice",
+      "100g broccoli",
+      "1 tsp olive oil",
+      "salt, pepper, garlic"
+    ],
+    "steps": [
+      "Season and grill chicken breast.",
+      "Steam broccoli and cook rice.",
+      "Combine and drizzle olive oil."
+    ]
+  },
+  {
+    "name": "Greek Yogurt Oat Parfait",
+    "goal_tags": ["fat_loss", "maintenance"],
+    "meal_type": "breakfast",
+    "calories": 420,
+    "protein_g": 28,
+    "carbs_g": 52,
+    "fat_g": 10,
+    "ingredients": [
+      "200g greek yogurt",
+      "50g oats",
+      "1 banana",
+      "10g almonds"
+    ],
+    "steps": [
+      "Layer yogurt and oats.",
+      "Top with sliced banana and almonds."
+    ]
+  },
+  {
+    "name": "Tofu Stir-Fry",
+    "goal_tags": ["fat_loss", "maintenance", "muscle_gain"],
+    "meal_type": "dinner",
+    "calories": 510,
+    "protein_g": 30,
+    "carbs_g": 42,
+    "fat_g": 24,
+    "ingredients": [
+      "200g tofu",
+      "150g mixed vegetables",
+      "120g cooked rice",
+      "1 tsp olive oil",
+      "soy sauce, ginger, garlic"
+    ],
+    "steps": [
+      "Saute tofu until golden.",
+      "Add vegetables and sauce.",
+      "Serve with cooked rice."
+    ]
+  },
+  {
+    "name": "Salmon Sweet Potato Plate",
+    "goal_tags": ["maintenance", "muscle_gain"],
+    "meal_type": "dinner",
+    "calories": 680,
+    "protein_g": 45,
+    "carbs_g": 48,
+    "fat_g": 34,
+    "ingredients": [
+      "180g salmon",
+      "250g sweet potato",
+      "100g spinach",
+      "1 tsp olive oil"
+    ],
+    "steps": [
+      "Bake salmon with spices.",
+      "Roast sweet potato.",
+      "Saute spinach lightly and plate all items."
+    ]
+  },
+  {
+    "name": "Lentil Power Soup",
+    "goal_tags": ["fat_loss", "maintenance"],
+    "meal_type": "lunch",
+    "calories": 390,
+    "protein_g": 24,
+    "carbs_g": 56,
+    "fat_g": 8,
+    "ingredients": [
+      "220g cooked lentils",
+      "100g tomatoes",
+      "80g spinach",
+      "30g onions",
+      "spices and broth"
+    ],
+    "steps": [
+      "Cook onions and spices.",
+      "Add lentils, tomatoes, broth.",
+      "Simmer and finish with spinach."
+    ]
+  }
+]

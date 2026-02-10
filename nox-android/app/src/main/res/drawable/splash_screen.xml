@@ -1,0 +1,18 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:angle="315"
+                android:startColor="#050507"
+                android:endColor="#1A1115" />
+        </shape>
+    </item>
+    <item android:gravity="center">
+        <inset
+            android:insetLeft="98dp"
+            android:insetTop="250dp"
+            android:insetRight="98dp"
+            android:insetBottom="250dp"
+            android:drawable="@drawable/ic_nox_logo" />
+    </item>
+</layer-list>

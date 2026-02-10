@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: nox-web
+    env: python
+    plan: free
+    rootDir: .
+    buildCommand: "python3 -m pip install --upgrade pip"
+    startCommand: "python3 -m fitness_nutrition_agent.web_server --host 0.0.0.0 --port $PORT"
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.13.0

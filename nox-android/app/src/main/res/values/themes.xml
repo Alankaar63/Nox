@@ -1,0 +1,17 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="Theme.NOX" parent="Theme.Material3.Dark.NoActionBar">
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@color/nox_bg</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
+        <item name="android:windowBackground">@color/nox_bg</item>
+        <item name="colorPrimary">@color/nox_primary</item>
+        <item name="colorOnPrimary">@color/nox_text</item>
+        <item name="colorSecondary">@color/nox_secondary</item>
+        <item name="colorSurface">@color/nox_surface</item>
+        <item name="colorOnSurface">@color/nox_text</item>
+    </style>
+
+    <style name="Theme.NOX.Startup" parent="Theme.Material3.Dark.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash_screen</item>
+    </style>
+</resources>
