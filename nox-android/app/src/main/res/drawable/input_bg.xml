@@ -1,8 +1,8 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
-    <corners android:radius="12dp" />
+    <corners android:radius="14dp" />
     <gradient
         android:angle="90"
-        android:startColor="#CA0D111B"
-        android:endColor="#D0131722" />
-    <stroke android:width="1dp" android:color="#5A6E748A" />
+        android:startColor="#DA0B0F16"
+        android:endColor="#D3121822" />
+    <stroke android:width="1dp" android:color="#5C697A94" />
 </shape>

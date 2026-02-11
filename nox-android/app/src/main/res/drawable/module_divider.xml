@@ -2,7 +2,7 @@
     <size android:height="2dp" />
     <gradient
         android:angle="0"
-        android:startColor="#00FC455F"
-        android:centerColor="#CCFC455F"
-        android:endColor="#00FC455F" />
+        android:startColor="#00FF3157"
+        android:centerColor="#AAFF4868"
+        android:endColor="#007CCBFF" />
 </shape>

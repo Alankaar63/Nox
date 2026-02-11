@@ -222,7 +222,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupQuickActions() {
-        val rootScroll = findViewById<NestedScrollView>(R.id.rootScroll)
         val dashboardCard = findViewById<View>(R.id.dashboardCard)
         val workoutCard = findViewById<View>(R.id.workoutCard)
         val mealCard = findViewById<View>(R.id.mealCard)
@@ -230,15 +229,19 @@ class MainActivity : AppCompatActivity() {
         val actionWorkout = findViewById<Button>(R.id.actionWorkout)
         val actionMeal = findViewById<Button>(R.id.actionMeal)
         val opsTicker = findViewById<TextView>(R.id.opsTicker)
+        val rootScroll = findViewById<NestedScrollView>(R.id.rootScroll)
 
         actionDashboard.setOnClickListener {
-            scrollToView(rootScroll, dashboardCard)
+            activateModule("dashboard", rootScroll, dashboardCard, workoutCard, mealCard)
+            highlightAction(actionDashboard, actionWorkout, actionMeal)
         }
         actionWorkout.setOnClickListener {
-            scrollToView(rootScroll, workoutCard)
+            activateModule("workout", rootScroll, dashboardCard, workoutCard, mealCard)
+            highlightAction(actionWorkout, actionDashboard, actionMeal)
         }
         actionMeal.setOnClickListener {
-            scrollToView(rootScroll, mealCard)
+            activateModule("meal", rootScroll, dashboardCard, workoutCard, mealCard)
+            highlightAction(actionMeal, actionDashboard, actionWorkout)
         }
 
         val cards = listOf(dashboardCard, workoutCard, mealCard)
@@ -272,10 +275,48 @@ class MainActivity : AppCompatActivity() {
             repeatCount = ValueAnimator.INFINITE
             start()
         }
+
+        activateModule("dashboard", rootScroll, dashboardCard, workoutCard, mealCard)
+        highlightAction(actionDashboard, actionWorkout, actionMeal)
     }
 
-    private fun scrollToView(scroll: NestedScrollView, target: View) {
-        scroll.post { scroll.smoothScrollTo(0, target.top) }
+    private fun activateModule(
+        module: String,
+        scroll: NestedScrollView,
+        dashboardCard: View,
+        workoutCard: View,
+        mealCard: View
+    ) {
+        val cards = mapOf(
+            "dashboard" to dashboardCard,
+            "workout" to workoutCard,
+            "meal" to mealCard
+        )
+        cards.forEach { (name, view) ->
+            if (name == module) {
+                view.visibility = View.VISIBLE
+                view.alpha = 0f
+                view.translationY = 24f
+                view.animate()
+                    .alpha(1f)
+                    .translationY(0f)
+                    .setDuration(280)
+                    .setInterpolator(AccelerateDecelerateInterpolator())
+                    .start()
+            } else {
+                view.visibility = View.GONE
+            }
+        }
+        scroll.post { scroll.smoothScrollTo(0, 0) }
+    }
+
+    private fun highlightAction(active: Button, firstInactive: Button, secondInactive: Button) {
+        active.scaleX = 1.06f
+        active.scaleY = 1.06f
+        firstInactive.scaleX = 1.0f
+        firstInactive.scaleY = 1.0f
+        secondInactive.scaleX = 1.0f
+        secondInactive.scaleY = 1.0f
     }
 
     private fun refreshDashboard(dashboardText: TextView, statusText: TextView) {
