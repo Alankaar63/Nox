@@ -4,6 +4,7 @@ import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.view.MotionEvent
 import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.Button
@@ -11,11 +12,18 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.core.content.ContextCompat
 import androidx.core.widget.NestedScrollView
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.bumptech.glide.Glide
+import com.nox.app.data.NoxRepository
+import com.nox.app.ui.MainViewModel
+import com.nox.app.ui.MainViewModelFactory
 import kotlinx.coroutines.launch
 import org.json.JSONArray
 import org.json.JSONObject
@@ -28,8 +36,13 @@ class MainActivity : AppCompatActivity() {
     private lateinit var api: ApiService
     private lateinit var prefs: SharedPreferences
 
+    private lateinit var motionRoot: MotionLayout
     private var selectedProvider: String = "guest"
     private var activeUserName: String = ""
+
+    private val viewModel: MainViewModel by viewModels {
+        MainViewModelFactory(NoxRepository(api))
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.Theme_NOX)
@@ -44,22 +57,38 @@ class MainActivity : AppCompatActivity() {
             .build()
             .create(ApiService::class.java)
 
+        motionRoot = findViewById(R.id.mainContent)
+
         setupHeroVisuals()
         setupQuickActions()
+        setupScrollMotion()
         setupLoginUi()
+        setupMicroInteractions()
+        bindViewModel()
         runLoadingSequence()
 
+        findViewById<Button>(R.id.refreshButton).setOnClickListener {
+            viewModel.refreshDashboard(activeUserName)
+        }
+        findViewById<Button>(R.id.logWorkoutButton).setOnClickListener {
+            logWorkout()
+        }
+        findViewById<Button>(R.id.logMealButton).setOnClickListener {
+            logMeal()
+        }
+    }
+
+    private fun bindViewModel() {
         val dashboardText = findViewById<TextView>(R.id.dashboardText)
         val statusText = findViewById<TextView>(R.id.statusText)
 
-        findViewById<Button>(R.id.refreshButton).setOnClickListener {
-            refreshDashboard(dashboardText, statusText)
-        }
-        findViewById<Button>(R.id.logWorkoutButton).setOnClickListener {
-            logWorkout(statusText)
-        }
-        findViewById<Button>(R.id.logMealButton).setOnClickListener {
-            logMeal(statusText)
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.uiState.collect { state ->
+                    dashboardText.text = state.dashboardSummary
+                    statusText.text = state.status
+                }
+            }
         }
     }
 
@@ -104,9 +133,8 @@ class MainActivity : AppCompatActivity() {
 
         continueBtn.setOnClickListener {
             val nameInput = findViewById<EditText>(R.id.nameInput).text.toString().trim()
-            val statusText = findViewById<TextView>(R.id.statusText)
             if (nameInput.isBlank()) {
-                statusText.text = "Please enter your name to continue"
+                viewModel.setStatus("Enter your name to continue")
                 return@setOnClickListener
             }
             activeUserName = nameInput
@@ -144,19 +172,16 @@ class MainActivity : AppCompatActivity() {
             showMainContent()
         } else {
             findViewById<View>(R.id.loginCard).visibility = View.VISIBLE
-            findViewById<View>(R.id.mainContent).visibility = View.GONE
+            motionRoot.visibility = View.GONE
         }
     }
 
     private fun showMainContent() {
         findViewById<View>(R.id.loginCard).visibility = View.GONE
-        findViewById<View>(R.id.mainContent).visibility = View.VISIBLE
+        motionRoot.visibility = View.VISIBLE
 
         findViewById<TextView>(R.id.welcomeText).text = "${selectedProvider.uppercase()} | $activeUserName"
-
-        val dashboardText = findViewById<TextView>(R.id.dashboardText)
-        val statusText = findViewById<TextView>(R.id.statusText)
-        refreshDashboard(dashboardText, statusText)
+        viewModel.refreshDashboard(activeUserName)
     }
 
     private fun setupHeroVisuals() {
@@ -170,7 +195,7 @@ class MainActivity : AppCompatActivity() {
         val phelpsImage = findViewById<ImageView>(R.id.phelpsImage)
 
         Glide.with(this)
-            .load("file:///android_asset/athletes/chris-bumstead.jpg")
+            .load("file:///android_asset/athletes/michael-phelps.jpg")
             .centerCrop()
             .placeholder(R.drawable.ic_nox_logo)
             .error(R.drawable.ic_nox_logo)
@@ -197,7 +222,7 @@ class MainActivity : AppCompatActivity() {
             .error(R.drawable.ic_nox_logo)
             .into(phelpsImage)
 
-        ObjectAnimator.ofFloat(title, "alpha", 0.75f, 1f).apply {
+        ObjectAnimator.ofFloat(title, "alpha", 0.76f, 1f).apply {
             duration = 1050
             repeatMode = ValueAnimator.REVERSE
             repeatCount = ValueAnimator.INFINITE
@@ -213,10 +238,17 @@ class MainActivity : AppCompatActivity() {
             start()
         }
 
-        ObjectAnimator.ofFloat(scanLine, "translationX", -130f, 320f).apply {
+        ObjectAnimator.ofFloat(scanLine, "translationX", -130f, 280f).apply {
             duration = 1900
             repeatMode = ValueAnimator.RESTART
             repeatCount = ValueAnimator.INFINITE
+            start()
+        }
+
+        ObjectAnimator.ofFloat(findViewById<View>(R.id.heroLottie), "rotation", 0f, 8f, 0f).apply {
+            duration = 3000
+            repeatCount = ValueAnimator.INFINITE
+            repeatMode = ValueAnimator.REVERSE
             start()
         }
     }
@@ -244,19 +276,6 @@ class MainActivity : AppCompatActivity() {
             highlightAction(actionMeal, actionDashboard, actionWorkout)
         }
 
-        val cards = listOf(dashboardCard, workoutCard, mealCard)
-        cards.forEachIndexed { index, card ->
-            card.alpha = 0f
-            card.translationY = 32f
-            card.animate()
-                .alpha(1f)
-                .translationY(0f)
-                .setStartDelay((index * 120).toLong())
-                .setDuration(520)
-                .setInterpolator(AccelerateDecelerateInterpolator())
-                .start()
-        }
-
         val actionButtons = listOf(actionDashboard, actionWorkout, actionMeal)
         actionButtons.forEachIndexed { idx, button ->
             ObjectAnimator.ofFloat(button, "translationY", 0f, -4f, 0f).apply {
@@ -269,7 +288,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         opsTicker.isSelected = true
-        ObjectAnimator.ofFloat(opsTicker, "alpha", 0.68f, 1f).apply {
+        ObjectAnimator.ofFloat(opsTicker, "alpha", 0.66f, 1f).apply {
             duration = 900
             repeatMode = ValueAnimator.REVERSE
             repeatCount = ValueAnimator.INFINITE
@@ -278,6 +297,57 @@ class MainActivity : AppCompatActivity() {
 
         activateModule("dashboard", rootScroll, dashboardCard, workoutCard, mealCard)
         highlightAction(actionDashboard, actionWorkout, actionMeal)
+    }
+
+    private fun setupScrollMotion() {
+        val rootScroll = findViewById<NestedScrollView>(R.id.rootScroll)
+        val title = findViewById<TextView>(R.id.titleText)
+        val altTitle = findViewById<TextView>(R.id.titleAltText)
+        val tagline = findViewById<TextView>(R.id.taglineText)
+
+        rootScroll.setOnScrollChangeListener { _, _, scrollY, _, _ ->
+            val progress = (scrollY / 420f).coerceIn(0f, 1f)
+            motionRoot.progress = progress
+            altTitle.alpha = progress
+            title.alpha = 1f - (progress * 0.55f)
+            tagline.alpha = 1f - (progress * 0.45f)
+        }
+
+        ObjectAnimator.ofFloat(title, "letterSpacing", 0.03f, 0.12f, 0.03f).apply {
+            duration = 2200
+            repeatMode = ValueAnimator.REVERSE
+            repeatCount = ValueAnimator.INFINITE
+            start()
+        }
+    }
+
+    private fun setupMicroInteractions() {
+        val buttons = listOf(
+            R.id.refreshButton,
+            R.id.logWorkoutButton,
+            R.id.logMealButton,
+            R.id.actionDashboard,
+            R.id.actionWorkout,
+            R.id.actionMeal,
+            R.id.continueButton,
+            R.id.providerGoogleButton,
+            R.id.providerFacebookButton,
+            R.id.providerGuestButton
+        )
+
+        buttons.forEach { id ->
+            findViewById<Button>(id).setOnTouchListener { view, event ->
+                when (event.actionMasked) {
+                    MotionEvent.ACTION_DOWN -> {
+                        view.animate().scaleX(0.96f).scaleY(0.96f).setDuration(90).start()
+                    }
+                    MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
+                        view.animate().scaleX(1f).scaleY(1f).setDuration(120).start()
+                    }
+                }
+                false
+            }
+        }
     }
 
     private fun activateModule(
@@ -319,28 +389,7 @@ class MainActivity : AppCompatActivity() {
         secondInactive.scaleY = 1.0f
     }
 
-    private fun refreshDashboard(dashboardText: TextView, statusText: TextView) {
-        lifecycleScope.launch {
-            statusText.text = "Fetching dashboard..."
-            runCatching {
-                api.getDashboard()
-            }.onSuccess { dash ->
-                dashboardText.text = buildString {
-                    appendLine("Date: ${dash.date}")
-                    appendLine("Goal: ${dash.profile.goal}")
-                    appendLine("Daily target: ${dash.profile.daily_calorie_target} kcal")
-                    appendLine("Calories today: ${dash.calories_today.toInt()} kcal")
-                    appendLine("Workout streak: ${dash.workout_streak} day(s)")
-                    append("Motivation: ${dash.motivation}")
-                }
-                statusText.text = "Dashboard synced | user: $activeUserName"
-            }.onFailure { e ->
-                statusText.text = "Dashboard error: ${e.message}"
-            }
-        }
-    }
-
-    private fun logWorkout(statusText: TextView) {
+    private fun logWorkout() {
         val exercise = findViewById<EditText>(R.id.workoutExerciseInput).text.toString().trim()
         val sets = findViewById<EditText>(R.id.workoutSetsInput).text.toString().toIntOrNull() ?: 0
         val reps = findViewById<EditText>(R.id.workoutRepsInput).text.toString().toIntOrNull() ?: 0
@@ -350,84 +399,68 @@ class MainActivity : AppCompatActivity() {
         val notes = findViewById<EditText>(R.id.workoutNotesInput).text.toString().trim()
 
         if (exercise.isBlank()) {
-            statusText.text = "Workout error: exercise is required"
+            viewModel.setStatus("Workout error: exercise is required")
             return
         }
 
-        lifecycleScope.launch {
-            statusText.text = "Logging workout..."
-            val req = WorkoutRequest(
-                date = LocalDate.now().toString(),
-                exercise = exercise,
-                sets = sets,
-                reps = reps,
-                weight = weight,
-                duration_min = duration,
-                rpe = rpe,
-                notes = notes,
-                user_name = activeUserName,
-                provider = selectedProvider
-            )
-            runCatching {
-                api.logWorkout(req)
-            }.onSuccess {
-                saveLocalUserEntry(
-                    type = "workout",
-                    payload = JSONObject()
-                        .put("exercise", exercise)
-                        .put("sets", sets)
-                        .put("reps", reps)
-                        .put("weight", weight)
-                        .put("duration_min", duration)
-                        .put("rpe", rpe)
-                        .put("notes", notes)
-                )
-                statusText.text = "Workout logged for $activeUserName"
-                clearWorkoutInputs()
-            }.onFailure { e ->
-                statusText.text = "Workout error: ${e.message}"
-            }
-        }
+        val req = WorkoutRequest(
+            date = LocalDate.now().toString(),
+            exercise = exercise,
+            sets = sets,
+            reps = reps,
+            weight = weight,
+            duration_min = duration,
+            rpe = rpe,
+            notes = notes,
+            user_name = activeUserName,
+            provider = selectedProvider
+        )
+
+        viewModel.logWorkout(req, activeUserName)
+        saveLocalUserEntry(
+            type = "workout",
+            payload = JSONObject()
+                .put("exercise", exercise)
+                .put("sets", sets)
+                .put("reps", reps)
+                .put("weight", weight)
+                .put("duration_min", duration)
+                .put("rpe", rpe)
+                .put("notes", notes)
+        )
+        clearWorkoutInputs()
     }
 
-    private fun logMeal(statusText: TextView) {
+    private fun logMeal() {
         val mealName = findViewById<EditText>(R.id.mealNameInput).text.toString().trim()
         val description = findViewById<EditText>(R.id.mealDescriptionInput).text.toString().trim()
 
         if (mealName.isBlank() || description.isBlank()) {
-            statusText.text = "Meal error: meal name and description are required"
+            viewModel.setStatus("Meal error: meal name and description are required")
             return
         }
 
-        lifecycleScope.launch {
-            statusText.text = "Logging meal..."
-            val req = MealRequest(
-                date = LocalDate.now().toString(),
-                meal_name = mealName,
-                description = description,
-                user_name = activeUserName,
-                provider = selectedProvider
-            )
-            runCatching {
-                api.logMeal(req)
-            }.onSuccess {
-                saveLocalUserEntry(
-                    type = "meal",
-                    payload = JSONObject()
-                        .put("meal_name", mealName)
-                        .put("description", description)
-                )
-                statusText.text = "Meal logged for $activeUserName"
-                clearMealInputs()
-            }.onFailure { e ->
-                statusText.text = "Meal error: ${e.message}"
-            }
-        }
+        val req = MealRequest(
+            date = LocalDate.now().toString(),
+            meal_name = mealName,
+            description = description,
+            user_name = activeUserName,
+            provider = selectedProvider
+        )
+
+        viewModel.logMeal(req, activeUserName)
+        saveLocalUserEntry(
+            type = "meal",
+            payload = JSONObject()
+                .put("meal_name", mealName)
+                .put("description", description)
+        )
+        clearMealInputs()
     }
 
     private fun saveLocalUserEntry(type: String, payload: JSONObject) {
         if (activeUserName.isBlank()) return
-        val key = "entries_${activeUserName.lowercase().replace(" ", "_")}"
+        val key = "entries_${activeUserName.lowercase().replace(" ", "_")}" 
         val existing = prefs.getString(key, "[]") ?: "[]"
         val arr = JSONArray(existing)
         val entry = JSONObject()

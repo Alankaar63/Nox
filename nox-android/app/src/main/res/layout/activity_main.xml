@@ -5,345 +5,255 @@
     android:layout_height="match_parent"
     android:background="@drawable/app_bg_neo">
 
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/rootScroll"
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/loginCard"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true">
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="56dp"
+        android:layout_marginEnd="14dp"
+        app:cardBackgroundColor="@android:color/transparent"
+        app:cardCornerRadius="18dp"
+        app:cardElevation="0dp"
+        app:strokeColor="#00000000">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/card_panel_bg"
             android:orientation="vertical"
             android:padding="14dp">
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/loginCard"
-                android:layout_width="match_parent"
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:cardBackgroundColor="@android:color/transparent"
-                app:cardCornerRadius="18dp"
-                app:cardElevation="0dp"
-                app:strokeColor="#00000000">
+                android:text="Enter NOX"
+                android:textColor="@color/nox_text"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/card_panel_bg"
-                    android:orientation="vertical"
-                    android:padding="14dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Sign in to NOX"
-                        android:textColor="@color/nox_text"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:text="Choose provider and enter your name"
-                        android:textColor="@color/nox_text_muted" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:orientation="horizontal">
-
-                        <Button
-                            android:id="@+id/providerGoogleButton"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:layout_marginEnd="6dp"
-                            android:backgroundTint="@color/nox_primary"
-                            android:text="Google"
-                            android:textColor="@color/nox_text" />
-
-                        <Button
-                            android:id="@+id/providerFacebookButton"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:layout_marginStart="6dp"
-                            android:layout_marginEnd="6dp"
-                            android:backgroundTint="@color/nox_primary_dark"
-                            android:text="Facebook"
-                            android:textColor="@color/nox_text" />
-
-                        <Button
-                            android:id="@+id/providerGuestButton"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:layout_marginStart="6dp"
-                            android:backgroundTint="@color/nox_accent"
-                            android:text="Guest"
-                            android:textColor="@color/nox_text" />
-                    </LinearLayout>
-
-                    <EditText
-                        android:id="@+id/nameInput"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:background="@drawable/input_bg"
-                        android:hint="Enter your name"
-                        android:inputType="textPersonName"
-                        android:paddingHorizontal="10dp"
-                        android:textColor="@color/nox_text"
-                        android:textColorHint="@color/nox_text_muted" />
-
-                    <Button
-                        android:id="@+id/continueButton"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:backgroundTint="@color/nox_primary"
-                        android:text="Continue"
-                        android:textColor="@color/nox_text" />
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Sign in and unlock your personal training stream"
+                android:textColor="@color/nox_text_muted" />
 
             <LinearLayout
-                android:id="@+id/mainContent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:visibility="gone">
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
 
-                <FrameLayout
-                    android:id="@+id/heroCard"
-                    android:layout_width="match_parent"
-                    android:layout_height="380dp"
-                    android:layout_marginTop="12dp"
-                    android:background="@drawable/hero_card_bg"
-                    android:clipToOutline="true">
-
-                    <ImageView
-                        android:id="@+id/heroImage"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:contentDescription="NOX Hero"
-                        android:scaleType="centerCrop" />
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/hero_overlay" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:padding="14dp">
-
-                        <TextView
-                            android:id="@+id/titleText"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="NOX"
-                            android:textColor="@color/nox_text"
-                            android:textSize="56sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/taglineText"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="-7dp"
-                            android:text="Train smart, fuel ruthless"
-                            android:textColor="@color/nox_secondary"
-                            android:textSize="18sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/welcomeText"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="6dp"
-                            android:background="@drawable/glow_chip_bg"
-                            android:paddingHorizontal="10dp"
-                            android:paddingVertical="4dp"
-                            android:text="Welcome"
-                            android:textColor="@color/nox_text"
-                            android:textSize="10sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/scanLine"
-                            android:layout_width="120dp"
-                            android:layout_height="3dp"
-                            android:layout_marginTop="9dp"
-                            android:background="@color/nox_primary" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:background="@drawable/glow_chip_bg"
-                            android:paddingHorizontal="10dp"
-                            android:paddingVertical="5dp"
-                            android:text="WHAT DO YOU WANT TO DO?"
-                            android:textColor="@color/nox_text"
-                            android:textSize="10sp"
-                            android:textStyle="bold" />
-
-                        <HorizontalScrollView
-                            android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            android:layout_marginTop="10dp"
-                            android:layout_weight="1"
-                            android:scrollbars="none">
-
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:orientation="horizontal">
-
-                                <LinearLayout
-                                    android:layout_width="130dp"
-                                    android:layout_height="match_parent"
-                                    android:layout_marginEnd="10dp"
-                                    android:background="@drawable/athlete_frame_bg"
-                                    android:orientation="vertical"
-                                    android:padding="6dp">
-
-                                    <ImageView
-                                        android:id="@+id/boltImage"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="0dp"
-                                        android:layout_weight="1"
-                                        android:contentDescription="Usain Bolt"
-                                        android:scaleType="centerCrop"
-                                        android:src="@drawable/ic_nox_logo" />
-
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginTop="6dp"
-                                        android:text="USAIN BOLT"
-                                        android:textColor="@color/nox_text"
-                                        android:textSize="11sp"
-                                        android:textStyle="bold" />
-                                </LinearLayout>
-
-                                <LinearLayout
-                                    android:layout_width="130dp"
-                                    android:layout_height="match_parent"
-                                    android:layout_marginEnd="10dp"
-                                    android:background="@drawable/athlete_frame_bg"
-                                    android:orientation="vertical"
-                                    android:padding="6dp">
-
-                                    <ImageView
-                                        android:id="@+id/cbumImage"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="0dp"
-                                        android:layout_weight="1"
-                                        android:contentDescription="Chris Bumstead"
-                                        android:scaleType="centerCrop"
-                                        android:src="@drawable/ic_nox_logo" />
-
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginTop="6dp"
-                                        android:text="CHRIS BUMSTEAD"
-                                        android:textColor="@color/nox_text"
-                                        android:textSize="11sp"
-                                        android:textStyle="bold" />
-                                </LinearLayout>
-
-                                <LinearLayout
-                                    android:layout_width="130dp"
-                                    android:layout_height="match_parent"
-                                    android:background="@drawable/athlete_frame_bg"
-                                    android:orientation="vertical"
-                                    android:padding="6dp">
-
-                                    <ImageView
-                                        android:id="@+id/phelpsImage"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="0dp"
-                                        android:layout_weight="1"
-                                        android:contentDescription="Michael Phelps"
-                                        android:scaleType="centerCrop"
-                                        android:src="@drawable/ic_nox_logo" />
-
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginTop="6dp"
-                                        android:text="MICHAEL PHELPS"
-                                        android:textColor="@color/nox_text"
-                                        android:textSize="11sp"
-                                        android:textStyle="bold" />
-                                </LinearLayout>
-                            </LinearLayout>
-                        </HorizontalScrollView>
-                    </LinearLayout>
-                </FrameLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <Button
+                    android:id="@+id/providerGoogleButton"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:orientation="horizontal">
+                    android:layout_marginEnd="6dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/action_btn_dashboard_bg"
+                    android:text="Google"
+                    android:textColor="@color/nox_text"
+                    android:textStyle="bold" />
 
-                    <Button
-                        android:id="@+id/actionDashboard"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="6dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/action_btn_dashboard_bg"
-                        android:elevation="6dp"
-                        android:fontFamily="sans-serif-condensed"
-                        android:text="Dashboard"
-                        android:textColor="@color/nox_text"
-                        android:textSize="13sp"
-                        android:textStyle="bold" />
+                <Button
+                    android:id="@+id/providerFacebookButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:layout_marginEnd="6dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/action_btn_workout_bg"
+                    android:text="Facebook"
+                    android:textColor="@color/nox_text"
+                    android:textStyle="bold" />
 
-                    <Button
-                        android:id="@+id/actionWorkout"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="6dp"
-                        android:layout_marginEnd="6dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/action_btn_workout_bg"
-                        android:elevation="6dp"
-                        android:fontFamily="sans-serif-condensed"
-                        android:text="Workout"
-                        android:textColor="@color/nox_text"
-                        android:textSize="13sp"
-                        android:textStyle="bold" />
+                <Button
+                    android:id="@+id/providerGuestButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/action_btn_meal_bg"
+                    android:text="Guest"
+                    android:textColor="@color/nox_text"
+                    android:textStyle="bold" />
+            </LinearLayout>
 
-                    <Button
-                        android:id="@+id/actionMeal"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="6dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/action_btn_meal_bg"
-                        android:elevation="6dp"
-                        android:fontFamily="sans-serif-condensed"
-                        android:text="Meal"
-                        android:textColor="@color/nox_text"
-                        android:textSize="13sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
+            <EditText
+                android:id="@+id/nameInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/input_bg"
+                android:hint="Your name"
+                android:inputType="textPersonName"
+                android:paddingHorizontal="12dp"
+                android:textColor="@color/nox_text"
+                android:textColorHint="@color/nox_text_muted" />
+
+            <Button
+                android:id="@+id/continueButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/cta_btn_bg"
+                android:text="Launch Experience"
+                android:textColor="@color/nox_text"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <androidx.constraintlayout.motion.widget.MotionLayout
+        android:id="@+id/mainContent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        app:layoutDescription="@xml/scene_nox_main">
+
+        <ImageView
+            android:id="@+id/heroImage"
+            android:layout_width="0dp"
+            android:layout_height="380dp"
+            android:contentDescription="NOX Hero"
+            android:scaleType="centerCrop" />
+
+        <View
+            android:id="@+id/heroScrim"
+            android:layout_width="0dp"
+            android:layout_height="380dp"
+            android:background="@drawable/hero_overlay" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/heroLottie"
+            android:layout_width="88dp"
+            android:layout_height="88dp"
+            android:alpha="0.85"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/nox_energy_orbit" />
+
+        <TextView
+            android:id="@+id/titleText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-black"
+            android:text="NOX"
+            android:textColor="@color/nox_text"
+            android:textSize="62sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/titleAltText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:alpha="0"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:text="NOX"
+            android:textAllCaps="true"
+            android:textColor="@color/nox_secondary"
+            android:textSize="58sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/taglineText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:text="Train smart. Fuel ruthless."
+            android:textColor="@color/nox_secondary"
+            android:textSize="19sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/welcomeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/glow_chip_bg"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="4dp"
+            android:text="Welcome"
+            android:textColor="@color/nox_text"
+            android:textSize="10sp"
+            android:textStyle="bold" />
+
+        <View
+            android:id="@+id/scanLine"
+            android:layout_width="120dp"
+            android:layout_height="3dp"
+            android:background="@color/nox_primary" />
+
+        <LinearLayout
+            android:id="@+id/actionRail"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:layout_marginEnd="14dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/actionDashboard"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="6dp"
+                android:layout_weight="1"
+                android:background="@drawable/action_btn_dashboard_bg"
+                android:fontFamily="sans-serif-condensed"
+                android:text="Dashboard"
+                android:textColor="@color/nox_text"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/actionWorkout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:layout_marginEnd="6dp"
+                android:layout_weight="1"
+                android:background="@drawable/action_btn_workout_bg"
+                android:fontFamily="sans-serif-condensed"
+                android:text="Workout"
+                android:textColor="@color/nox_text"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/actionMeal"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:layout_weight="1"
+                android:background="@drawable/action_btn_meal_bg"
+                android:fontFamily="sans-serif-condensed"
+                android:text="Meal"
+                android:textColor="@color/nox_text"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/rootScroll"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:fillViewport="true"
+            android:paddingStart="14dp"
+            android:paddingEnd="14dp"
+            android:paddingBottom="18dp"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/opsTicker"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="8dp"
                     android:background="@drawable/ops_ticker_bg"
                     android:ellipsize="marquee"
                     android:fontFamily="sans-serif-condensed"
@@ -351,10 +261,97 @@
                     android:paddingHorizontal="10dp"
                     android:paddingVertical="8dp"
                     android:singleLine="true"
-                    android:text="NEON X PRO BUILD :: OPERATIONS FEED :: DASHBOARD TELEMETRY :: ADAPTIVE LOAD SIGNAL :: NUTRITION MEMORY ACTIVE ::"
+                    android:text="EXPERIENCE CORE :: MOTION UI ACTIVE :: ADAPTIVE ATHLETE TRACKER :: NOX OS"
                     android:textColor="@color/nox_secondary"
                     android:textSize="10sp"
                     android:textStyle="bold" />
+
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="172dp"
+                    android:layout_marginTop="10dp"
+                    android:scrollbars="none">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="130dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="10dp"
+                            android:background="@drawable/athlete_frame_bg"
+                            android:orientation="vertical"
+                            android:padding="6dp">
+
+                            <ImageView
+                                android:id="@+id/boltImage"
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="1"
+                                android:scaleType="centerCrop" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="6dp"
+                                android:text="USAIN BOLT"
+                                android:textColor="@color/nox_text"
+                                android:textSize="11sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="130dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="10dp"
+                            android:background="@drawable/athlete_frame_bg"
+                            android:orientation="vertical"
+                            android:padding="6dp">
+
+                            <ImageView
+                                android:id="@+id/cbumImage"
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="1"
+                                android:scaleType="centerCrop" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="6dp"
+                                android:text="CHRIS BUMSTEAD"
+                                android:textColor="@color/nox_text"
+                                android:textSize="11sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="130dp"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/athlete_frame_bg"
+                            android:orientation="vertical"
+                            android:padding="6dp">
+
+                            <ImageView
+                                android:id="@+id/phelpsImage"
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="1"
+                                android:scaleType="centerCrop" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="6dp"
+                                android:text="MICHAEL PHELPS"
+                                android:textColor="@color/nox_text"
+                                android:textSize="11sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </HorizontalScrollView>
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/dashboardCard"
@@ -383,10 +380,9 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:background="@drawable/module_chip_bg"
-                            android:fontFamily="sans-serif-condensed"
                             android:paddingHorizontal="10dp"
                             android:paddingVertical="4dp"
-                            android:text="SYSTEM MODULE 01"
+                            android:text="SCREEN 01"
                             android:textColor="@color/nox_text"
                             android:textSize="10sp"
                             android:textStyle="bold" />
@@ -411,7 +407,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
-                            android:text="Loading..."
                             android:textColor="@color/nox_text_muted" />
 
                         <Button
@@ -453,10 +448,9 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:background="@drawable/module_chip_bg"
-                            android:fontFamily="sans-serif-condensed"
                             android:paddingHorizontal="10dp"
                             android:paddingVertical="4dp"
-                            android:text="SYSTEM MODULE 02"
+                            android:text="SCREEN 02"
                             android:textColor="@color/nox_text"
                             android:textSize="10sp"
                             android:textStyle="bold" />
@@ -465,7 +459,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
-                            android:text="Log Workout"
+                            android:text="Workout"
                             android:textColor="@color/nox_text"
                             android:textSize="22sp"
                             android:textStyle="bold" />
@@ -482,7 +476,6 @@
                             android:layout_height="wrap_content"
                             android:background="@drawable/input_bg"
                             android:hint="Exercise"
-                            android:inputType="text"
                             android:paddingHorizontal="10dp"
                             android:textColor="@color/nox_text"
                             android:textColorHint="@color/nox_text_muted" />
@@ -552,7 +545,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@drawable/input_bg"
-                            android:hint="Duration (minutes)"
+                            android:hint="Duration (min)"
                             android:inputType="number"
                             android:paddingHorizontal="10dp"
                             android:textColor="@color/nox_text"
@@ -608,10 +601,9 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:background="@drawable/module_chip_bg"
-                            android:fontFamily="sans-serif-condensed"
                             android:paddingHorizontal="10dp"
                             android:paddingVertical="4dp"
-                            android:text="SYSTEM MODULE 03"
+                            android:text="SCREEN 03"
                             android:textColor="@color/nox_text"
                             android:textSize="10sp"
                             android:textStyle="bold" />
@@ -620,7 +612,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
-                            android:text="Log Meal"
+                            android:text="Nutrition"
                             android:textColor="@color/nox_text"
                             android:textSize="22sp"
                             android:textStyle="bold" />
@@ -636,8 +628,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@drawable/input_bg"
-                            android:hint="Meal name (lunch, dinner...)"
-                            android:inputType="text"
+                            android:hint="Meal type"
                             android:paddingHorizontal="10dp"
                             android:textColor="@color/nox_text"
                             android:textColorHint="@color/nox_text_muted" />
@@ -647,7 +638,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@drawable/input_bg"
-                            android:hint="Foods (e.g. 150g chicken breast, 1 banana)"
+                            android:hint="Foods and quantity"
                             android:inputType="textCapSentences|textMultiLine"
                             android:paddingHorizontal="10dp"
                             android:textColor="@color/nox_text"
@@ -671,15 +662,14 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="14dp"
                     android:background="@drawable/ops_ticker_bg"
-                    android:fontFamily="sans-serif-condensed"
                     android:paddingHorizontal="10dp"
                     android:paddingVertical="8dp"
                     android:text="Ready"
                     android:textColor="@color/nox_blue_glow"
                     android:textStyle="bold" />
             </LinearLayout>
-        </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.constraintlayout.motion.widget.MotionLayout>
 
     <FrameLayout
         android:id="@+id/loadingOverlay"
