@@ -5,6 +5,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
 }
 
+
 val keystoreProps = Properties()
 val keystorePropsFile = rootProject.file("keystore.properties")
 if (keystorePropsFile.exists()) {
@@ -22,8 +23,8 @@ android {
         applicationId = "com.nox.app"
         minSdk = 24
         targetSdk = 35
-        versionCode = 1
-        versionName = "1.0.0"
+        versionCode = 2
+        versionName = "1.1.0-neonx"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         val baseUrl = (project.findProperty("NOX_BASE_URL") as? String) ?: "http://10.0.2.2:8080/"
@@ -88,4 +89,5 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1")
     implementation("com.squareup.retrofit2:retrofit:2.11.0")
     implementation("com.squareup.retrofit2:converter-gson:2.11.0")
+    implementation("com.github.bumptech.glide:glide:4.16.0")
 }

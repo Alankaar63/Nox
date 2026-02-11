@@ -1,23 +1,42 @@
 package com.nox.app
 
+import android.animation.ObjectAnimator
+import android.animation.ValueAnimator
+import android.content.SharedPreferences
 import android.os.Bundle
+import android.view.View
+import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.core.widget.NestedScrollView
 import androidx.lifecycle.lifecycleScope
+import com.bumptech.glide.Glide
 import kotlinx.coroutines.launch
+import org.json.JSONArray
+import org.json.JSONObject
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.time.LocalDate
+import java.time.LocalDateTime
 
 class MainActivity : AppCompatActivity() {
     private lateinit var api: ApiService
+    private lateinit var prefs: SharedPreferences
+
+    private var selectedProvider: String = "guest"
+    private var activeUserName: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.Theme_NOX)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        prefs = getSharedPreferences("nox_user_state", MODE_PRIVATE)
 
         api = Retrofit.Builder()
             .baseUrl(BuildConfig.NOX_BASE_URL)
@@ -25,26 +44,238 @@ class MainActivity : AppCompatActivity() {
             .build()
             .create(ApiService::class.java)
 
+        setupHeroVisuals()
+        setupQuickActions()
+        setupLoginUi()
+        runLoadingSequence()
+
         val dashboardText = findViewById<TextView>(R.id.dashboardText)
         val statusText = findViewById<TextView>(R.id.statusText)
 
-        val refreshButton = findViewById<Button>(R.id.refreshButton)
-        val logWorkoutButton = findViewById<Button>(R.id.logWorkoutButton)
-        val logMealButton = findViewById<Button>(R.id.logMealButton)
-
-        refreshButton.setOnClickListener {
+        findViewById<Button>(R.id.refreshButton).setOnClickListener {
             refreshDashboard(dashboardText, statusText)
         }
-
-        logWorkoutButton.setOnClickListener {
+        findViewById<Button>(R.id.logWorkoutButton).setOnClickListener {
             logWorkout(statusText)
         }
-
-        logMealButton.setOnClickListener {
+        findViewById<Button>(R.id.logMealButton).setOnClickListener {
             logMeal(statusText)
         }
+    }
 
+    private fun runLoadingSequence() {
+        val loadingOverlay = findViewById<View>(R.id.loadingOverlay)
+        val loadingTitle = findViewById<TextView>(R.id.loadingTitle)
+        val loadingPercent = findViewById<TextView>(R.id.loadingPercent)
+        val loadingProgress = findViewById<ProgressBar>(R.id.loadingProgress)
+
+        ObjectAnimator.ofFloat(loadingTitle, "alpha", 0.6f, 1f).apply {
+            duration = 700
+            repeatCount = ValueAnimator.INFINITE
+            repeatMode = ValueAnimator.REVERSE
+            start()
+        }
+
+        ValueAnimator.ofInt(0, 100).apply {
+            duration = 2200
+            interpolator = AccelerateDecelerateInterpolator()
+            addUpdateListener { animator ->
+                val value = animator.animatedValue as Int
+                loadingPercent.text = "$value%"
+                loadingProgress.progress = value
+            }
+            doOnEnd {
+                loadingOverlay.visibility = View.GONE
+                enterAppAfterLoading()
+            }
+            start()
+        }
+    }
+
+    private fun setupLoginUi() {
+        val googleBtn = findViewById<Button>(R.id.providerGoogleButton)
+        val facebookBtn = findViewById<Button>(R.id.providerFacebookButton)
+        val guestBtn = findViewById<Button>(R.id.providerGuestButton)
+        val continueBtn = findViewById<Button>(R.id.continueButton)
+
+        googleBtn.setOnClickListener { setProvider("google") }
+        facebookBtn.setOnClickListener { setProvider("facebook") }
+        guestBtn.setOnClickListener { setProvider("guest") }
+
+        continueBtn.setOnClickListener {
+            val nameInput = findViewById<EditText>(R.id.nameInput).text.toString().trim()
+            val statusText = findViewById<TextView>(R.id.statusText)
+            if (nameInput.isBlank()) {
+                statusText.text = "Please enter your name to continue"
+                return@setOnClickListener
+            }
+            activeUserName = nameInput
+            prefs.edit()
+                .putString("active_user_name", activeUserName)
+                .putString("active_provider", selectedProvider)
+                .apply()
+            showMainContent()
+        }
+
+        setProvider("guest")
+    }
+
+    private fun setProvider(provider: String) {
+        selectedProvider = provider
+        val googleBtn = findViewById<Button>(R.id.providerGoogleButton)
+        val facebookBtn = findViewById<Button>(R.id.providerFacebookButton)
+        val guestBtn = findViewById<Button>(R.id.providerGuestButton)
+
+        val active = ContextCompat.getColor(this, R.color.nox_primary)
+        val inactive = ContextCompat.getColor(this, R.color.nox_primary_dark)
+
+        googleBtn.backgroundTintList = android.content.res.ColorStateList.valueOf(if (provider == "google") active else inactive)
+        facebookBtn.backgroundTintList = android.content.res.ColorStateList.valueOf(if (provider == "facebook") active else inactive)
+        guestBtn.backgroundTintList = android.content.res.ColorStateList.valueOf(if (provider == "guest") active else inactive)
+    }
+
+    private fun enterAppAfterLoading() {
+        val savedName = prefs.getString("active_user_name", "") ?: ""
+        val savedProvider = prefs.getString("active_provider", "guest") ?: "guest"
+
+        if (savedName.isNotBlank()) {
+            activeUserName = savedName
+            selectedProvider = savedProvider
+            showMainContent()
+        } else {
+            findViewById<View>(R.id.loginCard).visibility = View.VISIBLE
+            findViewById<View>(R.id.mainContent).visibility = View.GONE
+        }
+    }
+
+    private fun showMainContent() {
+        findViewById<View>(R.id.loginCard).visibility = View.GONE
+        findViewById<View>(R.id.mainContent).visibility = View.VISIBLE
+
+        findViewById<TextView>(R.id.welcomeText).text = "${selectedProvider.uppercase()} | $activeUserName"
+
+        val dashboardText = findViewById<TextView>(R.id.dashboardText)
+        val statusText = findViewById<TextView>(R.id.statusText)
         refreshDashboard(dashboardText, statusText)
+    }
+
+    private fun setupHeroVisuals() {
+        val title = findViewById<TextView>(R.id.titleText)
+        val tagline = findViewById<TextView>(R.id.taglineText)
+        val scanLine = findViewById<View>(R.id.scanLine)
+
+        val heroImage = findViewById<ImageView>(R.id.heroImage)
+        val boltImage = findViewById<ImageView>(R.id.boltImage)
+        val cbumImage = findViewById<ImageView>(R.id.cbumImage)
+        val phelpsImage = findViewById<ImageView>(R.id.phelpsImage)
+
+        Glide.with(this)
+            .load("file:///android_asset/athletes/chris-bumstead.jpg")
+            .centerCrop()
+            .placeholder(R.drawable.ic_nox_logo)
+            .error(R.drawable.ic_nox_logo)
+            .into(heroImage)
+
+        Glide.with(this)
+            .load("file:///android_asset/athletes/usain-bolt.jpg")
+            .centerCrop()
+            .placeholder(R.drawable.ic_nox_logo)
+            .error(R.drawable.ic_nox_logo)
+            .into(boltImage)
+
+        Glide.with(this)
+            .load("file:///android_asset/athletes/chris-bumstead.jpg")
+            .centerCrop()
+            .placeholder(R.drawable.ic_nox_logo)
+            .error(R.drawable.ic_nox_logo)
+            .into(cbumImage)
+
+        Glide.with(this)
+            .load("file:///android_asset/athletes/michael-phelps.jpg")
+            .centerCrop()
+            .placeholder(R.drawable.ic_nox_logo)
+            .error(R.drawable.ic_nox_logo)
+            .into(phelpsImage)
+
+        ObjectAnimator.ofFloat(title, "alpha", 0.75f, 1f).apply {
+            duration = 1050
+            repeatMode = ValueAnimator.REVERSE
+            repeatCount = ValueAnimator.INFINITE
+            interpolator = AccelerateDecelerateInterpolator()
+            start()
+        }
+
+        ObjectAnimator.ofFloat(tagline, "translationX", -8f, 8f).apply {
+            duration = 1850
+            repeatMode = ValueAnimator.REVERSE
+            repeatCount = ValueAnimator.INFINITE
+            interpolator = AccelerateDecelerateInterpolator()
+            start()
+        }
+
+        ObjectAnimator.ofFloat(scanLine, "translationX", -130f, 320f).apply {
+            duration = 1900
+            repeatMode = ValueAnimator.RESTART
+            repeatCount = ValueAnimator.INFINITE
+            start()
+        }
+    }
+
+    private fun setupQuickActions() {
+        val rootScroll = findViewById<NestedScrollView>(R.id.rootScroll)
+        val dashboardCard = findViewById<View>(R.id.dashboardCard)
+        val workoutCard = findViewById<View>(R.id.workoutCard)
+        val mealCard = findViewById<View>(R.id.mealCard)
+        val actionDashboard = findViewById<Button>(R.id.actionDashboard)
+        val actionWorkout = findViewById<Button>(R.id.actionWorkout)
+        val actionMeal = findViewById<Button>(R.id.actionMeal)
+        val opsTicker = findViewById<TextView>(R.id.opsTicker)
+
+        actionDashboard.setOnClickListener {
+            scrollToView(rootScroll, dashboardCard)
+        }
+        actionWorkout.setOnClickListener {
+            scrollToView(rootScroll, workoutCard)
+        }
+        actionMeal.setOnClickListener {
+            scrollToView(rootScroll, mealCard)
+        }
+
+        val cards = listOf(dashboardCard, workoutCard, mealCard)
+        cards.forEachIndexed { index, card ->
+            card.alpha = 0f
+            card.translationY = 32f
+            card.animate()
+                .alpha(1f)
+                .translationY(0f)
+                .setStartDelay((index * 120).toLong())
+                .setDuration(520)
+                .setInterpolator(AccelerateDecelerateInterpolator())
+                .start()
+        }
+
+        val actionButtons = listOf(actionDashboard, actionWorkout, actionMeal)
+        actionButtons.forEachIndexed { idx, button ->
+            ObjectAnimator.ofFloat(button, "translationY", 0f, -4f, 0f).apply {
+                duration = 1700 + (idx * 180L)
+                repeatMode = ValueAnimator.RESTART
+                repeatCount = ValueAnimator.INFINITE
+                startDelay = (idx * 140L)
+                start()
+            }
+        }
+
+        opsTicker.isSelected = true
+        ObjectAnimator.ofFloat(opsTicker, "alpha", 0.68f, 1f).apply {
+            duration = 900
+            repeatMode = ValueAnimator.REVERSE
+            repeatCount = ValueAnimator.INFINITE
+            start()
+        }
+    }
+
+    private fun scrollToView(scroll: NestedScrollView, target: View) {
+        scroll.post { scroll.smoothScrollTo(0, target.top) }
     }
 
     private fun refreshDashboard(dashboardText: TextView, statusText: TextView) {
@@ -61,7 +292,7 @@ class MainActivity : AppCompatActivity() {
                     appendLine("Workout streak: ${dash.workout_streak} day(s)")
                     append("Motivation: ${dash.motivation}")
                 }
-                statusText.text = "Dashboard synced"
+                statusText.text = "Dashboard synced | user: $activeUserName"
             }.onFailure { e ->
                 statusText.text = "Dashboard error: ${e.message}"
             }
@@ -92,12 +323,25 @@ class MainActivity : AppCompatActivity() {
                 weight = weight,
                 duration_min = duration,
                 rpe = rpe,
-                notes = notes
+                notes = notes,
+                user_name = activeUserName,
+                provider = selectedProvider
             )
             runCatching {
                 api.logWorkout(req)
             }.onSuccess {
-                statusText.text = "Workout logged"
+                saveLocalUserEntry(
+                    type = "workout",
+                    payload = JSONObject()
+                        .put("exercise", exercise)
+                        .put("sets", sets)
+                        .put("reps", reps)
+                        .put("weight", weight)
+                        .put("duration_min", duration)
+                        .put("rpe", rpe)
+                        .put("notes", notes)
+                )
+                statusText.text = "Workout logged for $activeUserName"
                 clearWorkoutInputs()
             }.onFailure { e ->
                 statusText.text = "Workout error: ${e.message}"
@@ -119,17 +363,39 @@ class MainActivity : AppCompatActivity() {
             val req = MealRequest(
                 date = LocalDate.now().toString(),
                 meal_name = mealName,
-                description = description
+                description = description,
+                user_name = activeUserName,
+                provider = selectedProvider
             )
             runCatching {
                 api.logMeal(req)
             }.onSuccess {
-                statusText.text = "Meal logged"
+                saveLocalUserEntry(
+                    type = "meal",
+                    payload = JSONObject()
+                        .put("meal_name", mealName)
+                        .put("description", description)
+                )
+                statusText.text = "Meal logged for $activeUserName"
                 clearMealInputs()
             }.onFailure { e ->
                 statusText.text = "Meal error: ${e.message}"
             }
         }
+    }
+
+    private fun saveLocalUserEntry(type: String, payload: JSONObject) {
+        if (activeUserName.isBlank()) return
+        val key = "entries_${activeUserName.lowercase().replace(" ", "_")}"
+        val existing = prefs.getString(key, "[]") ?: "[]"
+        val arr = JSONArray(existing)
+        val entry = JSONObject()
+            .put("type", type)
+            .put("provider", selectedProvider)
+            .put("timestamp", LocalDateTime.now().toString())
+            .put("payload", payload)
+        arr.put(entry)
+        prefs.edit().putString(key, arr.toString()).apply()
     }
 
     private fun clearWorkoutInputs() {
@@ -145,5 +411,14 @@ class MainActivity : AppCompatActivity() {
     private fun clearMealInputs() {
         findViewById<EditText>(R.id.mealNameInput).text.clear()
         findViewById<EditText>(R.id.mealDescriptionInput).text.clear()
+    }
+
+    private fun ValueAnimator.doOnEnd(action: () -> Unit) {
+        addListener(object : android.animation.Animator.AnimatorListener {
+            override fun onAnimationStart(animation: android.animation.Animator) {}
+            override fun onAnimationEnd(animation: android.animation.Animator) = action()
+            override fun onAnimationCancel(animation: android.animation.Animator) {}
+            override fun onAnimationRepeat(animation: android.animation.Animator) {}
+        })
     }
 }

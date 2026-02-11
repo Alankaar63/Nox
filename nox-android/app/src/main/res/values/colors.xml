@@ -2,10 +2,14 @@
     <color name="nox_bg">#07080C</color>
     <color name="nox_bg_soft">#11131A</color>
     <color name="nox_surface">#161A22</color>
+    <color name="nox_surface_alt">#1B1F2B</color>
     <color name="nox_text">#F4F4F7</color>
     <color name="nox_text_muted">#B9BAC3</color>
     <color name="nox_primary">#FC455F</color>
     <color name="nox_primary_dark">#C12F46</color>
     <color name="nox_secondary">#FFB19F</color>
     <color name="nox_accent">#2C7BE5</color>
+    <color name="nox_blue_glow">#4A8BFF</color>
+    <color name="nox_danger_glow">#FF2D55</color>
+    <color name="nox_panel_border">#66FA5575</color>
 </resources>

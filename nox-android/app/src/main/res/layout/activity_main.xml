@@ -1,265 +1,735 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true"
     android:background="@color/nox_bg">
 
-    <LinearLayout
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/rootScroll"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
-        <TextView
-            android:id="@+id/titleText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="NOX"
-            android:textColor="@color/nox_text"
-            android:textSize="34sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/taglineText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
-            android:text="Train smart, fuel ruthless"
-            android:textColor="@color/nox_text_muted" />
-
-        <com.google.android.material.card.MaterialCardView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardBackgroundColor="@android:color/transparent"
-            app:strokeColor="#00000000"
-            app:cardElevation="0dp"
-            app:cardCornerRadius="14dp">
+            android:orientation="vertical"
+            android:padding="14dp">
 
-            <LinearLayout
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/loginCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:background="@drawable/card_panel_bg"
-                android:padding="12dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Dashboard"
-                    android:textColor="@color/nox_text"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/dashboardText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="Loading..."
-                    android:textColor="@color/nox_text_muted" />
-
-                <Button
-                    android:id="@+id/refreshButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:backgroundTint="@color/nox_primary"
-                    android:textColor="@color/nox_text"
-                    android:text="Refresh" />
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
-
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            app:cardBackgroundColor="@android:color/transparent"
-            app:strokeColor="#00000000"
-            app:cardElevation="0dp"
-            app:cardCornerRadius="14dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:background="@drawable/card_panel_bg"
-                android:padding="12dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Log Workout"
-                    android:textColor="@color/nox_text"
-                    android:textStyle="bold" />
-
-                <EditText
-                    android:id="@+id/workoutExerciseInput"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/input_bg"
-                    android:hint="Exercise"
-                    android:paddingHorizontal="10dp"
-                    android:textColor="@color/nox_text"
-                    android:textColorHint="@color/nox_text_muted"
-                    android:inputType="text" />
+                app:cardBackgroundColor="@android:color/transparent"
+                app:cardCornerRadius="18dp"
+                app:cardElevation="0dp"
+                app:strokeColor="#00000000">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:background="@drawable/card_panel_bg"
+                    android:orientation="vertical"
+                    android:padding="14dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Sign in to NOX"
+                        android:textColor="@color/nox_text"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="Choose provider and enter your name"
+                        android:textColor="@color/nox_text_muted" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:id="@+id/providerGoogleButton"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginEnd="6dp"
+                            android:backgroundTint="@color/nox_primary"
+                            android:text="Google"
+                            android:textColor="@color/nox_text" />
+
+                        <Button
+                            android:id="@+id/providerFacebookButton"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginStart="6dp"
+                            android:layout_marginEnd="6dp"
+                            android:backgroundTint="@color/nox_primary_dark"
+                            android:text="Facebook"
+                            android:textColor="@color/nox_text" />
+
+                        <Button
+                            android:id="@+id/providerGuestButton"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginStart="6dp"
+                            android:backgroundTint="@color/nox_accent"
+                            android:text="Guest"
+                            android:textColor="@color/nox_text" />
+                    </LinearLayout>
 
                     <EditText
-                        android:id="@+id/workoutSetsInput"
-                        android:layout_width="0dp"
+                        android:id="@+id/nameInput"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
+                        android:layout_marginTop="10dp"
                         android:background="@drawable/input_bg"
-                        android:hint="Sets"
+                        android:hint="Enter your name"
+                        android:inputType="textPersonName"
                         android:paddingHorizontal="10dp"
                         android:textColor="@color/nox_text"
-                        android:textColorHint="@color/nox_text_muted"
-                        android:inputType="number" />
+                        android:textColorHint="@color/nox_text_muted" />
 
-                    <EditText
-                        android:id="@+id/workoutRepsInput"
-                        android:layout_width="0dp"
+                    <Button
+                        android:id="@+id/continueButton"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:background="@drawable/input_bg"
-                        android:hint="Reps"
-                        android:paddingHorizontal="10dp"
-                        android:textColor="@color/nox_text"
-                        android:textColorHint="@color/nox_text_muted"
-                        android:inputType="number" />
+                        android:layout_marginTop="10dp"
+                        android:backgroundTint="@color/nox_primary"
+                        android:text="Continue"
+                        android:textColor="@color/nox_text" />
                 </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <LinearLayout
+                android:id="@+id/mainContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <FrameLayout
+                    android:id="@+id/heroCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="360dp"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/hero_card_bg"
+                    android:clipToOutline="true">
+
+                    <ImageView
+                        android:id="@+id/heroImage"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:contentDescription="NOX Hero"
+                        android:scaleType="centerCrop" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/hero_overlay" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:padding="14dp">
+
+                        <TextView
+                            android:id="@+id/titleText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="NOX"
+                            android:textColor="@color/nox_text"
+                            android:textSize="50sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/taglineText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="-7dp"
+                            android:text="Train smart, fuel ruthless"
+                            android:textColor="@color/nox_secondary"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/welcomeText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            android:background="@drawable/glow_chip_bg"
+                            android:paddingHorizontal="10dp"
+                            android:paddingVertical="4dp"
+                            android:text="Welcome"
+                            android:textColor="@color/nox_text"
+                            android:textSize="10sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/scanLine"
+                            android:layout_width="120dp"
+                            android:layout_height="3dp"
+                            android:layout_marginTop="9dp"
+                            android:background="@color/nox_primary" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:background="@drawable/glow_chip_bg"
+                            android:paddingHorizontal="10dp"
+                            android:paddingVertical="5dp"
+                            android:text="WHAT DO YOU WANT TO DO?"
+                            android:textColor="@color/nox_text"
+                            android:textSize="10sp"
+                            android:textStyle="bold" />
+
+                        <HorizontalScrollView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_weight="1"
+                            android:scrollbars="none">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal">
+
+                                <LinearLayout
+                                    android:layout_width="130dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginEnd="10dp"
+                                    android:background="@drawable/athlete_frame_bg"
+                                    android:orientation="vertical"
+                                    android:padding="6dp">
+
+                                    <ImageView
+                                        android:id="@+id/boltImage"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="0dp"
+                                        android:layout_weight="1"
+                                        android:contentDescription="Usain Bolt"
+                                        android:scaleType="centerCrop"
+                                        android:src="@drawable/ic_nox_logo" />
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="6dp"
+                                        android:text="USAIN BOLT"
+                                        android:textColor="@color/nox_text"
+                                        android:textSize="11sp"
+                                        android:textStyle="bold" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="130dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginEnd="10dp"
+                                    android:background="@drawable/athlete_frame_bg"
+                                    android:orientation="vertical"
+                                    android:padding="6dp">
+
+                                    <ImageView
+                                        android:id="@+id/cbumImage"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="0dp"
+                                        android:layout_weight="1"
+                                        android:contentDescription="Chris Bumstead"
+                                        android:scaleType="centerCrop"
+                                        android:src="@drawable/ic_nox_logo" />
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="6dp"
+                                        android:text="CHRIS BUMSTEAD"
+                                        android:textColor="@color/nox_text"
+                                        android:textSize="11sp"
+                                        android:textStyle="bold" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="130dp"
+                                    android:layout_height="match_parent"
+                                    android:background="@drawable/athlete_frame_bg"
+                                    android:orientation="vertical"
+                                    android:padding="6dp">
+
+                                    <ImageView
+                                        android:id="@+id/phelpsImage"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="0dp"
+                                        android:layout_weight="1"
+                                        android:contentDescription="Michael Phelps"
+                                        android:scaleType="centerCrop"
+                                        android:src="@drawable/ic_nox_logo" />
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="6dp"
+                                        android:text="MICHAEL PHELPS"
+                                        android:textColor="@color/nox_text"
+                                        android:textSize="11sp"
+                                        android:textStyle="bold" />
+                                </LinearLayout>
+                            </LinearLayout>
+                        </HorizontalScrollView>
+                    </LinearLayout>
+                </FrameLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
                     android:orientation="horizontal">
 
-                    <EditText
-                        android:id="@+id/workoutWeightInput"
+                    <Button
+                        android:id="@+id/actionDashboard"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginEnd="6dp"
                         android:layout_weight="1"
-                        android:background="@drawable/input_bg"
-                        android:hint="Weight"
-                        android:paddingHorizontal="10dp"
+                        android:background="@drawable/action_btn_dashboard_bg"
+                        android:elevation="6dp"
+                        android:fontFamily="sans-serif-condensed"
+                        android:text="Dashboard"
                         android:textColor="@color/nox_text"
-                        android:textColorHint="@color/nox_text_muted"
-                        android:inputType="numberDecimal" />
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
 
-                    <EditText
-                        android:id="@+id/workoutRpeInput"
+                    <Button
+                        android:id="@+id/actionWorkout"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="6dp"
+                        android:layout_marginEnd="6dp"
                         android:layout_weight="1"
-                        android:background="@drawable/input_bg"
-                        android:hint="RPE"
-                        android:paddingHorizontal="10dp"
+                        android:background="@drawable/action_btn_workout_bg"
+                        android:elevation="6dp"
+                        android:fontFamily="sans-serif-condensed"
+                        android:text="Workout"
                         android:textColor="@color/nox_text"
-                        android:textColorHint="@color/nox_text_muted"
-                        android:inputType="numberDecimal" />
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+
+                    <Button
+                        android:id="@+id/actionMeal"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="6dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/action_btn_meal_bg"
+                        android:elevation="6dp"
+                        android:fontFamily="sans-serif-condensed"
+                        android:text="Meal"
+                        android:textColor="@color/nox_text"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
                 </LinearLayout>
 
-                <EditText
-                    android:id="@+id/workoutDurationInput"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/input_bg"
-                    android:hint="Duration (minutes)"
-                    android:paddingHorizontal="10dp"
-                    android:textColor="@color/nox_text"
-                    android:textColorHint="@color/nox_text_muted"
-                    android:inputType="number" />
-
-                <EditText
-                    android:id="@+id/workoutNotesInput"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/input_bg"
-                    android:hint="Notes"
-                    android:paddingHorizontal="10dp"
-                    android:textColor="@color/nox_text"
-                    android:textColorHint="@color/nox_text_muted"
-                    android:inputType="textCapSentences|textMultiLine" />
-
-                <Button
-                    android:id="@+id/logWorkoutButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:backgroundTint="@color/nox_primary"
-                    android:textColor="@color/nox_text"
-                    android:text="Log Workout" />
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
-
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            app:cardBackgroundColor="@android:color/transparent"
-            app:strokeColor="#00000000"
-            app:cardElevation="0dp"
-            app:cardCornerRadius="14dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:background="@drawable/card_panel_bg"
-                android:padding="12dp">
-
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:id="@+id/opsTicker"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Log Meal"
-                    android:textColor="@color/nox_text"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/ops_ticker_bg"
+                    android:ellipsize="marquee"
+                    android:fontFamily="sans-serif-condensed"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="8dp"
+                    android:singleLine="true"
+                    android:text="NEON BUILD V2 :: OPERATIONS FEED :: DASHBOARD TELEMETRY :: ADAPTIVE LOAD SIGNAL :: NUTRITION MEMORY ACTIVE ::"
+                    android:textColor="@color/nox_secondary"
+                    android:textSize="10sp"
                     android:textStyle="bold" />
 
-                <EditText
-                    android:id="@+id/mealNameInput"
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/dashboardCard"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/input_bg"
-                    android:hint="Meal name (lunch, dinner...)"
-                    android:paddingHorizontal="10dp"
-                    android:textColor="@color/nox_text"
-                    android:textColorHint="@color/nox_text_muted"
-                    android:inputType="text" />
+                    android:layout_marginTop="12dp"
+                    app:cardBackgroundColor="@android:color/transparent"
+                    app:cardCornerRadius="14dp"
+                    app:cardElevation="0dp"
+                    app:strokeColor="#00000000">
 
-                <EditText
-                    android:id="@+id/mealDescriptionInput"
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/card_panel_bg"
+                        android:orientation="vertical"
+                        android:padding="12dp">
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="10dp"
+                            android:background="@drawable/card_top_glow" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:background="@drawable/module_chip_bg"
+                            android:fontFamily="sans-serif-condensed"
+                            android:paddingHorizontal="10dp"
+                            android:paddingVertical="4dp"
+                            android:text="SYSTEM MODULE 01"
+                            android:textColor="@color/nox_text"
+                            android:textSize="10sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="Dashboard"
+                            android:textColor="@color/nox_text"
+                            android:textSize="22sp"
+                            android:textStyle="bold" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:layout_marginTop="6dp"
+                            android:background="@drawable/module_divider" />
+
+                        <TextView
+                            android:id="@+id/dashboardText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="Loading..."
+                            android:textColor="@color/nox_text_muted" />
+
+                        <Button
+                            android:id="@+id/refreshButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:background="@drawable/cta_btn_bg"
+                            android:text="Refresh"
+                            android:textColor="@color/nox_text"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/workoutCard"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/input_bg"
-                    android:hint="Foods (e.g. 150g chicken breast, 1 banana)"
-                    android:paddingHorizontal="10dp"
-                    android:textColor="@color/nox_text"
-                    android:textColorHint="@color/nox_text_muted"
-                    android:inputType="textCapSentences|textMultiLine" />
+                    android:layout_marginTop="12dp"
+                    app:cardBackgroundColor="@android:color/transparent"
+                    app:cardCornerRadius="14dp"
+                    app:cardElevation="0dp"
+                    app:strokeColor="#00000000">
 
-                <Button
-                    android:id="@+id/logMealButton"
-                    android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/card_panel_bg"
+                        android:orientation="vertical"
+                        android:padding="12dp">
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="10dp"
+                            android:background="@drawable/card_top_glow" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:background="@drawable/module_chip_bg"
+                            android:fontFamily="sans-serif-condensed"
+                            android:paddingHorizontal="10dp"
+                            android:paddingVertical="4dp"
+                            android:text="SYSTEM MODULE 02"
+                            android:textColor="@color/nox_text"
+                            android:textSize="10sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="Log Workout"
+                            android:textColor="@color/nox_text"
+                            android:textSize="22sp"
+                            android:textStyle="bold" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:layout_marginTop="6dp"
+                            android:background="@drawable/module_divider" />
+
+                        <EditText
+                            android:id="@+id/workoutExerciseInput"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/input_bg"
+                            android:hint="Exercise"
+                            android:inputType="text"
+                            android:paddingHorizontal="10dp"
+                            android:textColor="@color/nox_text"
+                            android:textColorHint="@color/nox_text_muted" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <EditText
+                                android:id="@+id/workoutSetsInput"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:background="@drawable/input_bg"
+                                android:hint="Sets"
+                                android:inputType="number"
+                                android:paddingHorizontal="10dp"
+                                android:textColor="@color/nox_text"
+                                android:textColorHint="@color/nox_text_muted" />
+
+                            <EditText
+                                android:id="@+id/workoutRepsInput"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:background="@drawable/input_bg"
+                                android:hint="Reps"
+                                android:inputType="number"
+                                android:paddingHorizontal="10dp"
+                                android:textColor="@color/nox_text"
+                                android:textColorHint="@color/nox_text_muted" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <EditText
+                                android:id="@+id/workoutWeightInput"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:background="@drawable/input_bg"
+                                android:hint="Weight"
+                                android:inputType="numberDecimal"
+                                android:paddingHorizontal="10dp"
+                                android:textColor="@color/nox_text"
+                                android:textColorHint="@color/nox_text_muted" />
+
+                            <EditText
+                                android:id="@+id/workoutRpeInput"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:background="@drawable/input_bg"
+                                android:hint="RPE"
+                                android:inputType="numberDecimal"
+                                android:paddingHorizontal="10dp"
+                                android:textColor="@color/nox_text"
+                                android:textColorHint="@color/nox_text_muted" />
+                        </LinearLayout>
+
+                        <EditText
+                            android:id="@+id/workoutDurationInput"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/input_bg"
+                            android:hint="Duration (minutes)"
+                            android:inputType="number"
+                            android:paddingHorizontal="10dp"
+                            android:textColor="@color/nox_text"
+                            android:textColorHint="@color/nox_text_muted" />
+
+                        <EditText
+                            android:id="@+id/workoutNotesInput"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/input_bg"
+                            android:hint="Notes"
+                            android:inputType="textCapSentences|textMultiLine"
+                            android:paddingHorizontal="10dp"
+                            android:textColor="@color/nox_text"
+                            android:textColorHint="@color/nox_text_muted" />
+
+                        <Button
+                            android:id="@+id/logWorkoutButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:background="@drawable/cta_btn_bg"
+                            android:text="Log Workout"
+                            android:textColor="@color/nox_text"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/mealCard"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:backgroundTint="@color/nox_primary"
-                    android:textColor="@color/nox_text"
-                    android:text="Log Meal" />
+                    android:layout_marginTop="12dp"
+                    app:cardBackgroundColor="@android:color/transparent"
+                    app:cardCornerRadius="14dp"
+                    app:cardElevation="0dp"
+                    app:strokeColor="#00000000">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/card_panel_bg"
+                        android:orientation="vertical"
+                        android:padding="12dp">
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="10dp"
+                            android:background="@drawable/card_top_glow" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:background="@drawable/module_chip_bg"
+                            android:fontFamily="sans-serif-condensed"
+                            android:paddingHorizontal="10dp"
+                            android:paddingVertical="4dp"
+                            android:text="SYSTEM MODULE 03"
+                            android:textColor="@color/nox_text"
+                            android:textSize="10sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="Log Meal"
+                            android:textColor="@color/nox_text"
+                            android:textSize="22sp"
+                            android:textStyle="bold" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:layout_marginTop="6dp"
+                            android:background="@drawable/module_divider" />
+
+                        <EditText
+                            android:id="@+id/mealNameInput"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/input_bg"
+                            android:hint="Meal name (lunch, dinner...)"
+                            android:inputType="text"
+                            android:paddingHorizontal="10dp"
+                            android:textColor="@color/nox_text"
+                            android:textColorHint="@color/nox_text_muted" />
+
+                        <EditText
+                            android:id="@+id/mealDescriptionInput"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/input_bg"
+                            android:hint="Foods (e.g. 150g chicken breast, 1 banana)"
+                            android:inputType="textCapSentences|textMultiLine"
+                            android:paddingHorizontal="10dp"
+                            android:textColor="@color/nox_text"
+                            android:textColorHint="@color/nox_text_muted" />
+
+                        <Button
+                            android:id="@+id/logMealButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:background="@drawable/cta_btn_bg"
+                            android:text="Log Meal"
+                            android:textColor="@color/nox_text"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <TextView
+                    android:id="@+id/statusText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:background="@drawable/ops_ticker_bg"
+                    android:fontFamily="sans-serif-condensed"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="8dp"
+                    android:text="Ready"
+                    android:textColor="@color/nox_blue_glow"
+                    android:textStyle="bold" />
             </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 
-        <TextView
-            android:id="@+id/statusText"
+    <FrameLayout
+        android:id="@+id/loadingOverlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/nox_bg"
+        android:padding="24dp">
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="14dp"
-            android:text="Ready"
-            android:textColor="@color/nox_accent" />
-    </LinearLayout>
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
 
-</androidx.core.widget.NestedScrollView>
+            <TextView
+                android:id="@+id/loadingTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="NOX"
+                android:textColor="@color/nox_primary"
+                android:textSize="62sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="initializing NOX.Exe"
+                android:textColor="@color/nox_text"
+                android:textSize="22sp" />
+
+            <TextView
+                android:id="@+id/loadingPercent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="0%"
+                android:textColor="@color/nox_text"
+                android:textSize="34sp"
+                android:textStyle="bold" />
+
+            <ProgressBar
+                android:id="@+id/loadingProgress"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="22dp"
+                android:layout_marginTop="20dp"
+                android:max="100"
+                android:progress="0"
+                android:progressDrawable="@android:drawable/progress_horizontal" />
+        </LinearLayout>
+    </FrameLayout>
+
+</FrameLayout>
