@@ -1,0 +1,157 @@
+name: nox-platform
+
+services:
+  cassandra:
+    image: cassandra:5.0
+    container_name: nox-cassandra
+    ports:
+      - "9042:9042"
+    environment:
+      CASSANDRA_CLUSTER_NAME: nox-cluster
+      CASSANDRA_DC: nox-dc
+      CASSANDRA_RACK: nox-rack
+    volumes:
+      - cassandra-data:/var/lib/cassandra
+
+  redis:
+    image: redis/redis-stack:7.4.0-v0
+    container_name: nox-redis
+    ports:
+      - "6379:6379"
+      - "8001:8001"
+    volumes:
+      - redis-data:/data
+
+  postgres:
+    image: pgvector/pgvector:pg16
+    container_name: nox-postgres-pgvector
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: nox
+      POSTGRES_USER: nox
+      POSTGRES_PASSWORD: nox_dev_password
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ../schemas/postgres:/docker-entrypoint-initdb.d
+
+  influxdb:
+    image: influxdb:2.7
+    container_name: nox-influxdb
+    ports:
+      - "8086:8086"
+    environment:
+      DOCKER_INFLUXDB_INIT_MODE: setup
+      DOCKER_INFLUXDB_INIT_USERNAME: nox
+      DOCKER_INFLUXDB_INIT_PASSWORD: nox_dev_password
+      DOCKER_INFLUXDB_INIT_ORG: nox
+      DOCKER_INFLUXDB_INIT_BUCKET: biometrics
+      DOCKER_INFLUXDB_INIT_ADMIN_TOKEN: nox_dev_token
+    volumes:
+      - influx-data:/var/lib/influxdb2
+
+  weaviate:
+    image: semitechnologies/weaviate:1.25.6
+    container_name: nox-weaviate
+    ports:
+      - "8081:8080"
+    environment:
+      QUERY_DEFAULTS_LIMIT: 25
+      AUTHENTICATION_ANONYMOUS_ACCESS_ENABLED: "true"
+      PERSISTENCE_DATA_PATH: /var/lib/weaviate
+      DEFAULT_VECTORIZER_MODULE: none
+      CLUSTER_HOSTNAME: node1
+    volumes:
+      - weaviate-data:/var/lib/weaviate
+
+  zookeeper:
+    image: confluentinc/cp-zookeeper:7.6.1
+    container_name: nox-zookeeper
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+
+  kafka:
+    image: confluentinc/cp-kafka:7.6.1
+    container_name: nox-kafka
+    depends_on:
+      - zookeeper
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092,PLAINTEXT_INTERNAL://kafka:29092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_INTERNAL:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT_INTERNAL
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+
+  vllm:
+    image: vllm/vllm-openai:latest
+    container_name: nox-vllm
+    profiles:
+      - gpu
+    ports:
+      - "8000:8000"
+    command: ["--model", "meta-llama/Meta-Llama-3-8B-Instruct"]
+
+  embeddings:
+    image: vllm/vllm-openai:latest
+    container_name: nox-embeddings
+    profiles:
+      - gpu
+    ports:
+      - "8002:8000"
+    command: ["--model", "BAAI/bge-small-en-v1.5", "--task", "embed"]
+
+  ai-orchestrator:
+    build:
+      context: ../services/ai-orchestrator
+    container_name: nox-ai-orchestrator
+    ports:
+      - "8090:8090"
+    environment:
+      OPENAI_BASE_URL: http://vllm:8000/v1
+      EMBEDDINGS_BASE_URL: http://embeddings:8000/v1
+      NOX_EMBEDDING_MODEL: BAAI/bge-small-en-v1.5
+      VECTOR_STORE_URL: http://weaviate:8080
+      REDIS_URL: redis://redis:6379/0
+      POSTGRES_DSN: postgresql://nox:nox_dev_password@postgres:5432/nox
+    depends_on:
+      - redis
+      - postgres
+      - weaviate
+
+  rust-core-api:
+    build:
+      context: ../services/rust-core-api
+    container_name: nox-rust-core-api
+    ports:
+      - "8091:8091"
+    environment:
+      CASSANDRA_URL: cassandra:9042
+      KAFKA_BROKERS: kafka:29092
+      REDIS_URL: redis://redis:6379/0
+    depends_on:
+      - cassandra
+      - kafka
+      - redis
+
+  go-workers:
+    build:
+      context: ../services/go-workers
+    container_name: nox-go-workers
+    environment:
+      KAFKA_BROKERS: kafka:29092
+      INFLUX_URL: http://influxdb:8086
+      INFLUX_TOKEN: nox_dev_token
+    depends_on:
+      - kafka
+      - influxdb
+
+volumes:
+  cassandra-data:
+  redis-data:
+  postgres-data:
+  influx-data:
+  weaviate-data:

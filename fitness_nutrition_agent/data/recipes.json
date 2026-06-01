@@ -1,104 +1,109 @@
 [
   {
-    "name": "High-Protein Chicken Bowl",
-    "goal_tags": ["muscle_gain", "maintenance"],
-    "meal_type": "lunch",
-    "calories": 620,
-    "protein_g": 52,
-    "carbs_g": 58,
-    "fat_g": 18,
+    "name": "High-Protein Oatmeal",
+    "description": "Quick breakfast with 40g of protein",
     "ingredients": [
-      "180g chicken breast",
-      "180g cooked brown rice",
+      "80g oats",
+      "30g whey protein",
+      "100g whole milk",
+      "15g peanut butter"
+    ],
+    "prep_time_min": 5,
+    "calories": 550,
+    "macros": {
+      "protein_g": 42,
+      "carbs_g": 55,
+      "fat_g": 18
+    },
+    "tags": ["breakfast", "high-protein", "bulking"]
+  },
+  {
+    "name": "Chicken & Rice Classic",
+    "description": "The bodybuilding staple",
+    "ingredients": [
+      "200g chicken breast",
+      "150g white rice",
       "100g broccoli",
-      "1 tsp olive oil",
-      "salt, pepper, garlic"
+      "1 tbsp olive oil"
     ],
-    "steps": [
-      "Season and grill chicken breast.",
-      "Steam broccoli and cook rice.",
-      "Combine and drizzle olive oil."
-    ]
+    "prep_time_min": 20,
+    "calories": 620,
+    "macros": {
+      "protein_g": 65,
+      "carbs_g": 45,
+      "fat_g": 18
+    },
+    "tags": ["lunch", "dinner", "classic", "meal-prep"]
   },
   {
-    "name": "Greek Yogurt Oat Parfait",
-    "goal_tags": ["fat_loss", "maintenance"],
-    "meal_type": "breakfast",
-    "calories": 420,
-    "protein_g": 28,
-    "carbs_g": 52,
-    "fat_g": 10,
+    "name": "Lean Beef & Sweet Potato",
+    "description": "High iron and slow-digesting carbs",
     "ingredients": [
-      "200g greek yogurt",
-      "50g oats",
-      "1 banana",
-      "10g almonds"
+      "150g 95% lean ground beef",
+      "200g sweet potato",
+      "100g spinach"
     ],
-    "steps": [
-      "Layer yogurt and oats.",
-      "Top with sliced banana and almonds."
-    ]
+    "prep_time_min": 25,
+    "calories": 480,
+    "macros": {
+      "protein_g": 40,
+      "carbs_g": 45,
+      "fat_g": 12
+    },
+    "tags": ["dinner", "iron", "cutting"]
   },
   {
-    "name": "Tofu Stir-Fry",
-    "goal_tags": ["fat_loss", "maintenance", "muscle_gain"],
-    "meal_type": "dinner",
-    "calories": 510,
-    "protein_g": 30,
-    "carbs_g": 42,
-    "fat_g": 24,
+    "name": "Greek Yogurt Parfait",
+    "description": "Casein protein before bed",
     "ingredients": [
-      "200g tofu",
-      "150g mixed vegetables",
-      "120g cooked rice",
-      "1 tsp olive oil",
-      "soy sauce, ginger, garlic"
+      "200g Greek yogurt",
+      "30g almonds",
+      "50g blueberries",
+      "15g honey"
     ],
-    "steps": [
-      "Saute tofu until golden.",
-      "Add vegetables and sauce.",
-      "Serve with cooked rice."
-    ]
+    "prep_time_min": 5,
+    "calories": 380,
+    "macros": {
+      "protein_g": 25,
+      "carbs_g": 35,
+      "fat_g": 16
+    },
+    "tags": ["snack", "bedtime", "casein"]
   },
   {
-    "name": "Salmon Sweet Potato Plate",
-    "goal_tags": ["maintenance", "muscle_gain"],
-    "meal_type": "dinner",
-    "calories": 680,
-    "protein_g": 45,
-    "carbs_g": 48,
-    "fat_g": 34,
+    "name": "Mass Builder Shake",
+    "description": "1000+ calories liquid meal",
     "ingredients": [
-      "180g salmon",
-      "250g sweet potato",
-      "100g spinach",
-      "1 tsp olive oil"
+      "400ml whole milk",
+      "2 scoops whey protein",
+      "1 large banana",
+      "50g peanut butter",
+      "50g oats"
     ],
-    "steps": [
-      "Bake salmon with spices.",
-      "Roast sweet potato.",
-      "Saute spinach lightly and plate all items."
-    ]
+    "prep_time_min": 5,
+    "calories": 1050,
+    "macros": {
+      "protein_g": 75,
+      "carbs_g": 90,
+      "fat_g": 42
+    },
+    "tags": ["shake", "bulking", "post-workout"]
   },
   {
-    "name": "Lentil Power Soup",
-    "goal_tags": ["fat_loss", "maintenance"],
-    "meal_type": "lunch",
-    "calories": 390,
-    "protein_g": 24,
-    "carbs_g": 56,
-    "fat_g": 8,
+    "name": "Salmon & Asparagus",
+    "description": "High in Omega-3 fatty acids",
     "ingredients": [
-      "220g cooked lentils",
-      "100g tomatoes",
-      "80g spinach",
-      "30g onions",
-      "spices and broth"
+      "150g Atlantic salmon",
+      "150g asparagus",
+      "150g quinoa"
     ],
-    "steps": [
-      "Cook onions and spices.",
-      "Add lentils, tomatoes, broth.",
-      "Simmer and finish with spinach."
-    ]
+    "prep_time_min": 25,
+    "calories": 550,
+    "macros": {
+      "protein_g": 42,
+      "carbs_g": 35,
+      "fat_g": 26
+    },
+    "tags": ["dinner", "omega-3", "lean"]
   }
 ]

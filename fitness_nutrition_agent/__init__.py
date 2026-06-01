@@ -1,3 +1,9 @@
-from .agent import FitnessNutritionAgent
+__all__ = ["FitnessAgent"]
 
-__all__ = ["FitnessNutritionAgent"]
+
+def __getattr__(name: str):
+    if name == "FitnessAgent":
+        from .agent import FitnessAgent
+
+        return FitnessAgent
+    raise AttributeError(name)

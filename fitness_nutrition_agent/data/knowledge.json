@@ -1,0 +1,242 @@
+[
+  {
+    "coach": "Dorian Yates",
+    "topic": "volume_vs_intensity",
+    "content": "Most people do too many sets. One working set taken to absolute muscular failure — that's where the growth stimulus comes from. The warm-up sets prepare the muscle, but it's that last, brutal set beyond failure that forces adaptation. I never did more than one working set per exercise and I won six Mr. Olympia titles.",
+    "tags": ["HIT", "intensity", "failure", "volume", "working set"],
+    "difficulty_level": "advanced",
+    "source": "Blood and Guts (training philosophy)"
+  },
+  {
+    "coach": "Dorian Yates",
+    "topic": "mind_muscle_connection",
+    "content": "The mind-muscle connection is everything. You must feel the muscle working on every rep. If you can't feel it, the weight is too heavy or your form is wrong. I would visualize the muscle contracting and stretching before I even touched the weight.",
+    "tags": ["mind-muscle", "visualization", "form", "technique"],
+    "difficulty_level": "intermediate",
+    "source": "Dorian Yates interviews"
+  },
+  {
+    "coach": "Dorian Yates",
+    "topic": "recovery",
+    "content": "Training is the stimulus, food is the raw material, but growth happens during rest. If you're training 6 days a week with maximum intensity, you're not recovering — you're overtraining. I trained 4 days a week and grew more than guys training 6 days.",
+    "tags": ["recovery", "overtraining", "rest", "growth", "frequency"],
+    "difficulty_level": "intermediate",
+    "source": "Blood and Guts philosophy"
+  },
+  {
+    "coach": "Mike Mentzer",
+    "topic": "volume_vs_intensity",
+    "content": "The idea that more training produces more growth is perhaps the most prevalent and destructive myth in bodybuilding. There is an inverse relationship between intensity and volume — you cannot train with maximum intensity and high volume simultaneously. One all-out set is all you need to trigger the growth mechanism.",
+    "tags": ["Heavy Duty", "intensity", "volume", "overtraining", "HIT"],
+    "difficulty_level": "advanced",
+    "source": "Heavy Duty II"
+  },
+  {
+    "coach": "Mike Mentzer",
+    "topic": "rest_pause",
+    "content": "Rest-pause is the ultimate intensity technique. Perform a set to failure, rest 10-15 seconds, then continue with the same weight for as many additional reps as possible. This allows you to push past the point of momentary muscular failure and tap into deeper motor units that would otherwise remain dormant.",
+    "tags": ["rest-pause", "intensity technique", "failure", "Heavy Duty"],
+    "difficulty_level": "advanced",
+    "source": "Heavy Duty training methodology"
+  },
+  {
+    "coach": "Mike Mentzer",
+    "topic": "logical_training",
+    "content": "Training should be approached scientifically, not emotionally. The body requires a precise dose of exercise — not more, not less. Think of exercise like medicine: the right dose heals, too much poisons. Most bodybuilders are chronically overtrained because they confuse effort with results.",
+    "tags": ["science", "dose-response", "overtraining", "logic"],
+    "difficulty_level": "intermediate",
+    "source": "Heavy Duty philosophy"
+  },
+  {
+    "coach": "Arnold Schwarzenegger",
+    "topic": "volume_training",
+    "content": "The last three or four reps is what makes the muscle grow. That area of pain divides the champion from someone else who is not a champion. High volume training — 20-25 sets per body part — is what built the Golden Era physiques. You need to feel the pump, feel the blood rushing into the muscle.",
+    "tags": ["volume", "pump", "reps", "pain", "Golden Era"],
+    "difficulty_level": "intermediate",
+    "source": "Arnold's Encyclopedia of Modern Bodybuilding"
+  },
+  {
+    "coach": "Arnold Schwarzenegger",
+    "topic": "visualization",
+    "content": "When I curl, I see my bicep as a mountain peak. I visualize it growing bigger and bigger with each rep. The mind is the most powerful tool in bodybuilding. Before you can build the body, you must build the mind. Every rep starts in your head.",
+    "tags": ["visualization", "mind-muscle", "mental", "biceps", "focus"],
+    "difficulty_level": "beginner",
+    "source": "Arnold's training philosophy"
+  },
+  {
+    "coach": "Arnold Schwarzenegger",
+    "topic": "the_pump",
+    "content": "The most satisfying feeling you can get in the gym is the pump. Your muscles get a really tight feeling like your skin is going to explode any minute — it's really tight and it's like someone is blowing air into your muscle. The pump means blood is flooding the muscle with nutrients.",
+    "tags": ["pump", "blood flow", "hypertrophy", "feeling"],
+    "difficulty_level": "beginner",
+    "source": "Pumping Iron"
+  },
+  {
+    "coach": "Ronnie Coleman",
+    "topic": "consistency",
+    "content": "Everybody wants to be a bodybuilder, but nobody wants to lift no heavy-ass weight. Consistency is what separates champions from everybody else. I trained 6 days a week, never missed a session, for over 15 years. Light weight baby — but the consistency was the real secret.",
+    "tags": ["consistency", "frequency", "heavy", "dedication", "discipline"],
+    "difficulty_level": "beginner",
+    "source": "Ronnie Coleman interviews"
+  },
+  {
+    "coach": "Ronnie Coleman",
+    "topic": "compound_movements",
+    "content": "You can't build a house without a foundation. Squats, deadlifts, bench press, rows — these are the foundation exercises. I built my physique on heavy compound movements. Isolation exercises are the icing on the cake, but the cake is made of squats and deadlifts.",
+    "tags": ["compound", "squat", "deadlift", "bench", "foundation", "basics"],
+    "difficulty_level": "beginner",
+    "source": "Ronnie Coleman training philosophy"
+  },
+  {
+    "coach": "Lee Haney",
+    "topic": "recovery",
+    "content": "Stimulate, don't annihilate. The goal of training is to stimulate the muscle to grow, not to destroy it. If you leave the gym feeling completely demolished, you've done too much. Train smart, train intense, but leave something in the tank for recovery. Growth happens during rest, not during training.",
+    "tags": ["stimulate", "annihilate", "recovery", "overtraining", "smart training"],
+    "difficulty_level": "intermediate",
+    "source": "Lee Haney training principles"
+  },
+  {
+    "coach": "Lee Haney",
+    "topic": "progressive_overload",
+    "content": "Progressive overload doesn't always mean adding weight. You can increase the time under tension, reduce rest periods, add pauses at the bottom of the movement, or improve the quality of the contraction. The muscle doesn't know how much weight is on the bar — it only knows tension.",
+    "tags": ["progressive overload", "tension", "time under tension", "technique"],
+    "difficulty_level": "intermediate",
+    "source": "Lee Haney training wisdom"
+  },
+  {
+    "coach": "Jay Cutler",
+    "topic": "nutrition_precision",
+    "content": "You can't out-train a bad diet. I weighed every meal, tracked every macro, every single day for 20 years. In the offseason, I was eating 6,000+ calories. In prep, I dropped to 3,500. The difference between winning and losing at the Olympia level is nutrition precision.",
+    "tags": ["nutrition", "macros", "meal prep", "precision", "diet", "tracking"],
+    "difficulty_level": "intermediate",
+    "source": "Jay Cutler interviews"
+  },
+  {
+    "coach": "Jay Cutler",
+    "topic": "training_frequency",
+    "content": "I trained each body part once a week with maximum volume and intensity. Monday chest, Tuesday back, Wednesday shoulders, Thursday arms, Friday legs. Weekends off. Some people respond better to higher frequency — but for me, once a week with 20+ sets per body part was the sweet spot.",
+    "tags": ["frequency", "bro split", "volume", "body part split", "once per week"],
+    "difficulty_level": "intermediate",
+    "source": "Jay Cutler training approach"
+  },
+  {
+    "coach": "Jeff Nippard",
+    "topic": "science_based_programming",
+    "content": "The research is clear: for hypertrophy, you need to train each muscle group at least twice per week with 10-20 sets per muscle group per week. Anything below 10 sets is probably below your MEV (Minimum Effective Volume). Going above 20 sets starts to cut into recovery. RPE 7-9 is the sweet spot for most working sets.",
+    "tags": ["science", "hypertrophy", "volume", "frequency", "RPE", "MEV", "research"],
+    "difficulty_level": "intermediate",
+    "source": "Jeff Nippard YouTube / research reviews"
+  },
+  {
+    "coach": "Jeff Nippard",
+    "topic": "rpe_training",
+    "content": "RPE (Rate of Perceived Exertion) and RIR (Reps in Reserve) are the most practical tools for auto-regulating your training. RPE 8 means you could have done 2 more reps. RPE 10 means absolute failure. For hypertrophy, most sets should be RPE 7-9. Going to failure on every set increases fatigue disproportionately to the growth stimulus.",
+    "tags": ["RPE", "RIR", "auto-regulation", "failure", "fatigue management"],
+    "difficulty_level": "intermediate",
+    "source": "Jeff Nippard science-based training"
+  },
+  {
+    "coach": "Dr. Mike Israetel",
+    "topic": "volume_landmarks",
+    "content": "Every muscle has volume landmarks: MV (Maintenance Volume, ~6 sets/week), MEV (Minimum Effective Volume, ~8-10 sets/week), MAV (Maximum Adaptive Volume, ~12-20 sets/week), and MRV (Maximum Recoverable Volume, the ceiling). You should train between MEV and MAV for growth, and never exceed MRV for more than a week or two before deloading.",
+    "tags": ["volume landmarks", "MEV", "MAV", "MRV", "MV", "periodization", "deload"],
+    "difficulty_level": "advanced",
+    "source": "RP Strength / Scientific Principles of Hypertrophy Training"
+  },
+  {
+    "coach": "Dr. Mike Israetel",
+    "topic": "deload_science",
+    "content": "Deloads are not optional — they're when adaptation actually consolidates. After 4-6 weeks of progressively increasing volume, you must reduce volume by 50% and intensity by ~10% for one week. This allows accumulated fatigue to dissipate while retaining the fitness you've built. Skipping deloads leads to stagnation and injury.",
+    "tags": ["deload", "periodization", "fatigue", "recovery", "mesocycle"],
+    "difficulty_level": "advanced",
+    "source": "RP Strength / Dr. Mike Israetel"
+  },
+  {
+    "coach": "Dr. Mike Israetel",
+    "topic": "junk_volume",
+    "content": "Junk volume is any training beyond your MRV that doesn't contribute to growth but does contribute to fatigue. More is not always better. If you're doing 25 sets for chest per week and your chest isn't growing, you're probably past your MRV. Cut back to 15 sets and watch what happens.",
+    "tags": ["junk volume", "MRV", "overtraining", "diminishing returns"],
+    "difficulty_level": "advanced",
+    "source": "RP Strength"
+  },
+  {
+    "coach": "Andy Galpin",
+    "topic": "sleep_recovery",
+    "content": "Sleep is the single most anabolic activity you can do. During deep sleep, growth hormone secretion peaks, protein synthesis increases, and cortisol drops. Aim for 7-9 hours of quality sleep. If you're training hard and sleeping 5 hours, you're leaving 40% of your gains on the table.",
+    "tags": ["sleep", "recovery", "growth hormone", "anabolic", "cortisol"],
+    "difficulty_level": "beginner",
+    "source": "Andy Galpin - Huberman Lab podcast"
+  },
+  {
+    "coach": "Andy Galpin",
+    "topic": "strength_vs_hypertrophy",
+    "content": "Strength and hypertrophy are related but distinct adaptations. Strength is primarily a neural adaptation — your brain learning to recruit more motor units more efficiently. Hypertrophy is a structural adaptation — actual muscle fiber growth. For strength: 3-5 reps at 85%+ 1RM. For hypertrophy: 6-15 reps at 65-80% 1RM. Both benefit from each other.",
+    "tags": ["strength", "hypertrophy", "neural", "motor units", "rep ranges"],
+    "difficulty_level": "intermediate",
+    "source": "Andy Galpin research"
+  },
+  {
+    "coach": "Layne Norton",
+    "topic": "natural_bodybuilding",
+    "content": "Natural lifters need to train differently than enhanced lifters. Higher frequency (2x per muscle per week minimum), moderate volume, and absolute focus on progressive overload. You won't grow from pump and volume alone without pharmacological support. Track your lifts, add weight or reps systematically, and be patient — natural growth is slow but permanent.",
+    "tags": ["natural", "natty", "progressive overload", "frequency", "patience"],
+    "difficulty_level": "intermediate",
+    "source": "Layne Norton - BioLayne"
+  },
+  {
+    "coach": "Layne Norton",
+    "topic": "phat_training",
+    "content": "PHAT (Power Hypertrophy Adaptive Training) combines powerlifting and bodybuilding. Two power days focused on compound movements at low reps (3-5), three hypertrophy days with higher reps (8-15). This gives you the neural adaptations from heavy lifting AND the metabolic stress from higher volume. Best of both worlds for intermediates.",
+    "tags": ["PHAT", "powerlifting", "bodybuilding", "hybrid", "power", "hypertrophy"],
+    "difficulty_level": "intermediate",
+    "source": "Layne Norton PHAT program"
+  },
+  {
+    "coach": "Layne Norton",
+    "topic": "reverse_dieting",
+    "content": "After a cutting phase, don't immediately jump calories back to maintenance. Reverse diet by adding 100-150 calories per week. This allows your metabolism to upregulate gradually, minimizing fat regain while restoring energy and performance. Most people regain all their cut weight because they don't reverse diet properly.",
+    "tags": ["reverse diet", "cutting", "metabolism", "fat loss", "maintenance"],
+    "difficulty_level": "intermediate",
+    "source": "Layne Norton nutrition science"
+  },
+  {
+    "coach": "Jeff Nippard",
+    "topic": "periodization",
+    "content": "Linear periodization works for beginners — just add weight every session. Intermediate lifters should use undulating periodization: alternate between strength (3-5 reps), hypertrophy (8-12 reps), and metabolic stress (15-20 reps) sessions within the same week. Advanced lifters need block periodization: 4-6 week blocks focused on one quality.",
+    "tags": ["periodization", "linear", "undulating", "block", "programming"],
+    "difficulty_level": "intermediate",
+    "source": "Jeff Nippard programming guides"
+  },
+  {
+    "coach": "Dr. Mike Israetel",
+    "topic": "exercise_selection",
+    "content": "The best exercises for hypertrophy are ones that: 1) Place the target muscle at a full stretch under load, 2) Allow progressive overload over time, 3) You can perform safely and consistently, 4) Give you a good mind-muscle connection. Compound movements first for overall stimulus, then isolations to target specific muscles.",
+    "tags": ["exercise selection", "stretch", "progressive overload", "compound", "isolation"],
+    "difficulty_level": "intermediate",
+    "source": "RP Strength"
+  },
+  {
+    "coach": "Andy Galpin",
+    "topic": "nutrition_timing",
+    "content": "Nutrient timing matters less than total daily intake, but it's not irrelevant. Consuming 20-40g of protein within 2 hours post-workout supports muscle protein synthesis. Carbs post-workout replenish glycogen. Pre-workout meals should be eaten 1-3 hours before training. Don't train fasted if you care about performance.",
+    "tags": ["nutrition timing", "protein timing", "post-workout", "pre-workout", "MPS"],
+    "difficulty_level": "beginner",
+    "source": "Andy Galpin nutrition research"
+  },
+  {
+    "coach": "Dorian Yates",
+    "topic": "warm_up_protocol",
+    "content": "My warm-up protocol was simple: 2-3 progressively heavier sets before the one working set. First warm-up at 50% of working weight for 12 reps, second at 70% for 8 reps, then the working set at full weight to failure. No more than that. The warm-up sets should prepare the muscle, not fatigue it.",
+    "tags": ["warm-up", "working set", "preparation", "HIT protocol"],
+    "difficulty_level": "intermediate",
+    "source": "Blood and Guts training"
+  },
+  {
+    "coach": "Arnold Schwarzenegger",
+    "topic": "supersets",
+    "content": "I loved supersetting opposing muscle groups — chest and back together. Bench press superset with bent-over rows. This keeps the blood flowing between muscle groups, saves time, and gives you an incredible pump. It also allows each muscle to rest while the other works.",
+    "tags": ["supersets", "chest and back", "pump", "time efficiency", "antagonist"],
+    "difficulty_level": "intermediate",
+    "source": "Arnold's training methods"
+  }
+]

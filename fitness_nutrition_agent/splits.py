@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import Any
 
 # ---------------------------------------------------------------
-# Training Split Templates — All 6 splits from the APEX spec
+# Training Split Templates — all 6 splits from the NOX spec
 # Each split has: name, key, philosophy, days, and per-level prescriptions
 # ---------------------------------------------------------------
 

@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nox-observability
+  namespace: nox
+data:
+  metrics.md: |
+    NOX emits:
+    - workout_set_logged_total
+    - nutrition_log_written_total
+    - lock_in_created_total
+    - rag_retrieval_latency_ms
+    - llm_first_token_latency_ms
+    - sync_failure_total

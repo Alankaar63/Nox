@@ -1,0 +1,40 @@
+{
+  "classes": [
+    {
+      "class": "WorkoutMemory",
+      "description": "Embedded workout session summaries and set-level training signals.",
+      "vectorizer": "none",
+      "properties": [
+        { "name": "user_id", "dataType": ["text"] },
+        { "name": "session_id", "dataType": ["text"] },
+        { "name": "session_type", "dataType": ["text"] },
+        { "name": "summary", "dataType": ["text"] },
+        { "name": "text", "dataType": ["text"] },
+        { "name": "source", "dataType": ["text"] },
+        { "name": "metadata", "dataType": ["text"] },
+        { "name": "logged_at", "dataType": ["date"] }
+      ]
+    },
+    {
+      "class": "CoachKnowledge",
+      "description": "Training philosophy and nutrition knowledge chunks for NOX RAG.",
+      "vectorizer": "none",
+      "properties": [
+        { "name": "coach", "dataType": ["text"] },
+        { "name": "title", "dataType": ["text"] },
+        { "name": "body", "dataType": ["text"] },
+        { "name": "tags", "dataType": ["text[]"] }
+      ]
+    },
+    {
+      "class": "FoodMemory",
+      "description": "Food, meal, macro and diet-chart embeddings.",
+      "vectorizer": "none",
+      "properties": [
+        { "name": "food_name", "dataType": ["text"] },
+        { "name": "macros", "dataType": ["object"] },
+        { "name": "diet_tags", "dataType": ["text[]"] }
+      ]
+    }
+  ]
+}

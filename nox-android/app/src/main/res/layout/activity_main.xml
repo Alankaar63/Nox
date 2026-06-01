@@ -261,7 +261,7 @@
                     android:paddingHorizontal="10dp"
                     android:paddingVertical="8dp"
                     android:singleLine="true"
-                    android:text="EXPERIENCE CORE :: MOTION UI ACTIVE :: ADAPTIVE ATHLETE TRACKER :: NOX OS"
+                    android:text="CASSANDRA :: REDISJSON :: PGVECTOR :: WEAVIATE :: INFLUXDB :: RUST AXUM :: GO WORKERS :: FASTAPI LANGGRAPH :: VLLM :: KUBERNETES"
                     android:textColor="@color/nox_secondary"
                     android:textSize="10sp"
                     android:textStyle="bold" />

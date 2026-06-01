@@ -181,6 +181,10 @@ class Database:
         self._add_column_if_missing(cur, "user_profile", "protein_target_g", "REAL")
         self._add_column_if_missing(cur, "user_profile", "carbs_target_g", "REAL")
         self._add_column_if_missing(cur, "user_profile", "fat_target_g", "REAL")
+        self._add_column_if_missing(cur, "workouts", "user_name", "TEXT DEFAULT 'Athlete'")
+        self._add_column_if_missing(cur, "workouts", "provider", "TEXT DEFAULT 'guest'")
+        self._add_column_if_missing(cur, "meals", "user_name", "TEXT DEFAULT 'Athlete'")
+        self._add_column_if_missing(cur, "meals", "provider", "TEXT DEFAULT 'guest'")
 
         self.conn.commit()
 
